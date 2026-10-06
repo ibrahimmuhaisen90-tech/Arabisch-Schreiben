@@ -1,0 +1,20 @@
+{
+  "name": "Arabisch Schreiben",
+  "short_name": "Arabisch",
+  "description": "Arabisch lesen lernen – systematisch vom ersten Buchstaben bis zur Koranlektüre.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#123c3a",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

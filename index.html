@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#103b39" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Arabisch Schreiben" />
+    <meta name="description" content="Arabisch lesen lernen – systematisch vom ersten Buchstaben bis zur Koranlektüre." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <title>Arabisch Schreiben</title>
+    <link rel="stylesheet" href="./styles.css?v=3" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Hauptnavigation">
+        <button class="brand" data-view="home" aria-label="Zur Startseite">
+          <span class="brand-mark" aria-hidden="true">ض</span>
+          <span><strong>Arabisch</strong><small>Lesen lernen</small></span>
+        </button>
+        <nav class="side-nav">
+          <button class="nav-item active" data-view="home"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Start</span></button>
+          <button class="nav-item" data-view="path"><svg viewBox="0 0 24 24"><path d="M6 20V10m6 10V4m6 16v-7"/></svg><span>Lernweg</span></button>
+          <button class="nav-item" data-view="alphabet"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22zm16 0A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22z"/></svg><span>Alphabet</span></button>
+          <button class="nav-item" data-view="practice"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8m-8 4h5m-5 4h3"/></svg><span>Üben</span></button>
+        </nav>
+        <div class="side-goal"><span class="goal-icon">◒</span><div><small>Kursziel</small><strong>Koran lesen</strong></div></div>
+        <button class="side-help" id="sourceButton">Quellen &amp; Qualität</button>
+      </aside>
+      <div class="main-column">
+        <header class="topbar">
+          <div class="mobile-brand"><span class="brand-mark">ض</span><strong>Arabisch</strong></div>
+          <div class="topbar-copy"><strong id="topbarTitle">Start</strong><span id="topbarSubtitle">Dein persönlicher Lernweg</span></div>
+          <div class="top-actions">
+            <div class="streak" title="Lernserie"><span>◇</span><strong id="streakValue">1</strong><small>Tag</small></div>
+            <button class="icon-button" id="installButton" aria-label="Installationshilfe öffnen" title="App installieren"><svg viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </header>
+        <main id="appMain" tabindex="-1"></main>
+        <footer><span>Arabisch Schreiben</span><span>Fortschritt wird nur auf diesem Gerät gespeichert.</span></footer>
+      </div>
+    </div>
+    <nav class="bottom-nav" aria-label="Mobile Navigation">
+      <button class="active" data-view="home"><span>⌂</span>Start</button>
+      <button data-view="path"><span>◫</span>Lernweg</button>
+      <button data-view="alphabet"><span>أ</span>Alphabet</button>
+      <button data-view="practice"><span>✓</span>Üben</button>
+    </nav>
+    <dialog id="installDialog" class="modal">
+      <button class="dialog-close" data-close="installDialog" aria-label="Schließen">×</button>
+      <p class="eyebrow">Auf dem iPad installieren</p><h2>Zum Home-Bildschirm hinzufügen</h2>
+      <ol class="install-steps">
+        <li><span>1</span><p>Öffne diese Seite in <strong>Safari</strong>.</p></li>
+        <li><span>2</span><p>Tippe in der Symbolleiste auf <strong>Teilen</strong>.</p></li>
+        <li><span>3</span><p>Wähle <strong>„Zum Home-Bildschirm“</strong>.</p></li>
+        <li><span>4</span><p>Bestätige mit <strong>„Hinzufügen“</strong>.</p></li>
+      </ol>
+      <p class="note">Danach startet die Lern-App im Vollbild und funktioniert nach dem ersten Laden auch offline.</p>
+    </dialog>
+    <dialog id="letterDialog" class="modal letter-modal"><button class="dialog-close" data-close="letterDialog" aria-label="Schließen">×</button><div id="letterDialogContent"></div></dialog>
+    <dialog id="sourceDialog" class="modal">
+      <button class="dialog-close" data-close="sourceDialog" aria-label="Schließen">×</button>
+      <p class="eyebrow">Verantwortung &amp; Qualität</p><h2>So gehen wir mit Koraninhalten um</h2>
+      <div class="quality-list">
+        <div><span>01</span><p><strong>Keine ungeprüfte KI-Rezitation.</strong> Koranverse werden ausschließlich als authentische Aufnahmen qualifizierter Rezitatoren eingebunden.</p></div>
+        <div><span>02</span><p><strong>Verifizierter arabischer Text.</strong> Für Verse ist eine geprüfte Quelle mit unverändertem Text und klarer Lizenz vorgesehen.</p></div>
+        <div><span>03</span><p><strong>Fachliche Prüfung.</strong> Tajwīd-Erklärungen sollen vor Veröffentlichung durch eine qualifizierte Lehrperson geprüft werden.</p></div>
+        <div><span>04</span><p><strong>Klare Grenzen.</strong> Diese App unterstützt das Lernen, ersetzt aber keinen persönlichen Unterricht bei einer Lehrperson.</p></div>
+      </div>
+      <p class="note">Audio und vollständige Korantexte werden erst aktiviert, wenn Quelle, Lizenz und technische Bereitstellung geklärt sind.</p>
+    </dialog>
+    <script src="./content.js?v=3" defer></script>
+    <script src="./app.js?v=3" defer></script>
+  </body>
+</html>
