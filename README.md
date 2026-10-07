@@ -1,19 +1,31 @@
 # Arabisch Schreiben
 
+<p align="center">
+  <img src="assets/app-logo-1024.png" alt="Logo der App Arabisch Schreiben" width="180" />
+</p>
+
 Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der arabischen Schrift beginnen und langfristig den Koran lesen möchten.
 
 ## Aktueller Funktionsumfang
 
 - professioneller Lernpfad mit sechs aufeinander aufbauenden Etappen
 - 28 arabische Buchstaben mit Namen, Lautangabe und vier Kontextformen
-- drei ausgearbeitete Grundlagenlektionen
+- eigene Schreibübung für jeden der 28 Buchstaben und seine verfügbaren Formen
+- Schreibschritt in jeder Schriftbasis-Lektion, inklusive Auswahl aller dort eingeführten Buchstaben
+- 31 ausgearbeitete Kurslektionen mit Beispielen und Lernkontrollen
+- genau zehn Aufgabenvarianten in jeder Lektion
+- neu gemischte Fragen und Antwortmöglichkeiten bei jedem Übungsdurchlauf, ohne direkte Wiederholung
 - interaktive Tests für ähnlich aussehende Buchstaben
 - Schreibfläche für Apple Pencil, Stift oder Finger
+- Schreibmodus mit Vorlage und freier Übungsmodus ohne Vorlage
 - lokale Alif-Formprüfung
 - freie Buchstaben-Wiederholung mit Lernstatistik
 - lokale Fortschritts- und Serienanzeige
+- adaptive Tagesrunde mit zehn Aufgaben und Wiederholungsabständen von 1 bis 60 Tagen
+- persönliche Schwächenliste und frühere Wiederholung nach Fehlern
 - Offline-Unterstützung als Progressive Web App
 - responsive Oberfläche für iPad, Smartphone und Desktop
+- eigenes App-Logo und passende Home-Bildschirm-Symbole für iPad und PWA
 
 ## Audio- und Koraninhalte
 
@@ -34,6 +46,8 @@ python -m http.server 4173
 
 Danach `http://localhost:4173` im Browser öffnen.
 
+Für eine reine Produktvorschau mit allen freigeschalteten Feldern kann `http://localhost:4173/?preview=all` geöffnet werden. Unfertige Lektionen sind dort deutlich als Vorschau markiert und verändern den normalen Lernfortschritt nicht.
+
 ## GitHub Pages
 
 1. Dateien in ein GitHub-Repository hochladen.
@@ -46,6 +60,7 @@ Danach `http://localhost:4173` im Browser öffnen.
 ## Projektstruktur
 
 - `content.js`: Alphabet, Curriculum und Lerninhalte
+- `curriculum.js`: vollständige Lektionen, Leseregeln, Tajwīd-Grundlagen und Koranpraxis
 - `app.js`: Navigation, Übungen, Fortschritt und Schreibprüfung
 - `styles.css`: responsive Gestaltung
 - `service-worker.js`: Offline-Cache

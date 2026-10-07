@@ -9,15 +9,16 @@
     <meta name="apple-mobile-web-app-title" content="Arabisch Schreiben" />
     <meta name="description" content="Arabisch lesen lernen – systematisch vom ersten Buchstaben bis zur Koranlektüre." />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/app-icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/app-icon-180.png" />
     <title>Arabisch Schreiben</title>
-    <link rel="stylesheet" href="./styles.css?v=3" />
+    <link rel="stylesheet" href="./styles.css?v=10" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Hauptnavigation">
         <button class="brand" data-view="home" aria-label="Zur Startseite">
-          <span class="brand-mark" aria-hidden="true">ض</span>
+          <img class="brand-logo" src="./assets/app-icon-192.png" alt="" aria-hidden="true" />
           <span><strong>Arabisch</strong><small>Lesen lernen</small></span>
         </button>
         <nav class="side-nav">
@@ -31,7 +32,7 @@
       </aside>
       <div class="main-column">
         <header class="topbar">
-          <div class="mobile-brand"><span class="brand-mark">ض</span><strong>Arabisch</strong></div>
+          <div class="mobile-brand"><img class="brand-logo" src="./assets/app-icon-192.png" alt="" aria-hidden="true" /><strong>Arabisch</strong></div>
           <div class="topbar-copy"><strong id="topbarTitle">Start</strong><span id="topbarSubtitle">Dein persönlicher Lernweg</span></div>
           <div class="top-actions">
             <div class="streak" title="Lernserie"><span>◇</span><strong id="streakValue">1</strong><small>Tag</small></div>
@@ -71,7 +72,8 @@
       </div>
       <p class="note">Audio und vollständige Korantexte werden erst aktiviert, wenn Quelle, Lizenz und technische Bereitstellung geklärt sind.</p>
     </dialog>
-    <script src="./content.js?v=3" defer></script>
-    <script src="./app.js?v=3" defer></script>
+    <script src="./content.js?v=12" defer></script>
+    <script src="./curriculum.js?v=12" defer></script>
+    <script src="./app.js?v=12" defer></script>
   </body>
 </html>
