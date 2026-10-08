@@ -243,14 +243,28 @@ function shuffle(items) {
   return shuffled;
 }
 function lessonQuestionKey(question) { return `${question.glyph}|${question.prompt}|${question.answer}`; }
+function spreadLessonQuestions(items) {
+  const remaining=shuffle(items),ordered=[];
+  while(remaining.length){
+    const previous=ordered[ordered.length-1];
+    let nextIndex=previous?remaining.findIndex(question=>question.exercise!==previous.exercise&&question.prompt!==previous.prompt):-1;
+    if(nextIndex<0&&previous)nextIndex=remaining.findIndex(question=>question.prompt!==previous.prompt);
+    if(nextIndex<0)nextIndex=0;
+    ordered.push(remaining.splice(nextIndex,1)[0]);
+  }
+  return ordered;
+}
 function prepareLessonQuestions(lesson, avoidFirstKey="") {
-  const questions=shuffle(lesson.questions || []).map((question,index)=>{
-    const prepared={...question,options:shuffle(question.options),exercise:"Erkennen"};
-    if(index%5===4)return{...prepared,mode:"type",options:[],exercise:"Ohne Auswahl antworten"};
+  const questions=spreadLessonQuestions(lesson.questions || []).map((question,index)=>{
+    const prepared={...question,options:shuffle(question.options),exercise:question.exercise||"Erkennen"};
+    const shortLatinAnswer=String(prepared.answer).length<=18&&!/[\u0600-\u06ff]/.test(prepared.answer);
+    if(index%5===4&&shortLatinAnswer)return{...prepared,mode:"type",options:[],exercise:`${prepared.exercise} · ohne Auswahl`};
     return prepared;
   });
   if(questions.length>1&&lessonQuestionKey(questions[0])===avoidFirstKey){
-    const replacement=questions.findIndex((question,index)=>index>0&&lessonQuestionKey(question)!==avoidFirstKey);
+    const previous=(lesson.questions||[]).find(question=>lessonQuestionKey(question)===avoidFirstKey);
+    let replacement=questions.findIndex((question,index)=>index>0&&lessonQuestionKey(question)!==avoidFirstKey&&(!previous||question.prompt!==previous.prompt));
+    if(replacement<0)replacement=questions.findIndex((question,index)=>index>0&&lessonQuestionKey(question)!==avoidFirstKey);
     if(replacement>0)[questions[0],questions[replacement]]=[questions[replacement],questions[0]];
   }
   return questions;

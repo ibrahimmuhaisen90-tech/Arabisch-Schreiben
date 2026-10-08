@@ -35,6 +35,18 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - integriertes Feedback-Feld mit Kategorie, Bewertung, Freitext, Kopierfunktion und vorbereiteter GitHub-Rückmeldung
 - automatische Versionsprüfung beim Start und bei Rückkehr in die App; neue Online-Versionen ersetzen den alten Offline-Cache selbstständig
 
+## Didaktische Grundlage
+
+Die Lernfolge und die Aufgabenarten orientieren sich an etablierten Angeboten für erwachsene Anfänger und den Einstieg ins Qurʾān-Lesen:
+
+- [Arabic101 – Arabic Literacy Course](https://academy.arabic101.org/course-1-arabic-literacy/): Buchstaben allein und verbunden erkennen und schreiben, Vokalzeichen anwenden und anschließend lesen
+- [Madinah Arabic – Reading Course](https://madinaharabic.com/free-content/reading/lesson-1/part-1): Alphabet, kurze und lange Vokale, Tanwīn, Sukūn, Shadda, Verbindungen und Lesepraxis in aufeinander aufbauender Reihenfolge
+- [Understand Al-Qur'an Academy – Read Al-Qur'an](https://download.understandquran.com/fileadmin/user_upload/courses/Read_quran/English/Course.pdf): Buchstaben, Harakāt und danach grundlegende Tajwīd-Regeln für Erwachsene
+- [Al-Qaidah An-Nuraniah / Furqan Group](https://www.furqangroup.com/US/pages/6): systematisches Erkennen und Lautieren als Vorbereitung auf das Lesen des Qurʾān
+- [Quran Foundation – Uthmani text](https://api-docs.quran.com/docs/content_apis_versioned/4.0.0/quran-verses-uthmani/): Referenz für den in den Qurʾān-Lektionen verwendeten ʿUthmānī-Text
+
+Die App ersetzt keine persönliche Aussprachekorrektur. Makharij, Tajwīd und Rezitation sollten zusätzlich bei einer qualifizierten Lehrperson gelernt und überprüft werden.
+
 ## Audio- und Koraninhalte
 
 Der Prototyp enthält bewusst noch keine Rezitationsdateien. Koranrezitationen sollen ausschließlich von qualifizierten Rezitatoren stammen. Vor der Integration müssen Quelle, Lizenz, Offline-Nutzung und korrekte Zuordnung geprüft werden. Tajwīd-Erklärungen benötigen außerdem eine fachliche Prüfung durch eine qualifizierte Lehrperson.

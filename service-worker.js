@@ -1,5 +1,5 @@
-const CACHE_NAME = "arabisch-schreiben-v19";
-const APP_SHELL = ["./", "./index.html", "./styles.css?v=13", "./content.js?v=14", "./curriculum.js?v=13", "./app.js?v=16", "./manifest.webmanifest", "./assets/app-icon-180.png", "./assets/app-icon-192.png", "./assets/app-icon-512.png"];
+const CACHE_NAME = "arabisch-schreiben-v20";
+const APP_SHELL = ["./", "./index.html", "./styles.css?v=13", "./content.js?v=15", "./curriculum.js?v=14", "./app.js?v=17", "./manifest.webmanifest", "./assets/app-icon-180.png", "./assets/app-icon-192.png", "./assets/app-icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));

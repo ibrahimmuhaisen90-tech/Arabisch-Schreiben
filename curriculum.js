@@ -55,108 +55,345 @@ Object.assign(LESSONS,{
   nas:courseLesson({title:"An-Nās",module:"Koranpraxis",focus:"Endungen und Wiederholungen festigen",body:"Das Wort ٱلنَّاسِ kehrt mehrfach wieder. Nutze die Wiederholung, um Shadda, langes ā und Kasra am Ende zu festigen.",review:true,source:"Uthmani-Text: Quran Foundation / Quran.com",points:["An-Nās als wiederkehrendes Wortbild erkennen.","Shadda auf Nūn beachten.","Verse in sinnvollen Atemabschnitten lesen."],examples:[{arabic:"قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",label:"114:1",note:""},{arabic:"مَلِكِ ٱلنَّاسِ",label:"114:2",note:""},{arabic:"إِلَـٰهِ ٱلنَّاسِ",label:"114:3",note:""},{arabic:"مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",label:"114:4",note:""},{arabic:"ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",label:"114:5",note:""},{arabic:"مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",label:"114:6",note:""}],questions:[{glyph:"ٱلنَّاسِ",prompt:"Welcher Buchstabe trägt Shadda?",options:["Nūn","Sīn","Alif"],answer:"Nūn"},{glyph:"صُدُورِ",prompt:"Welcher lange Vokal ist enthalten?",options:["ū","ā","ī"],answer:"ū"}]})
 });
 
-// Jede Lektion besitzt einen breiten Aufgabenpool. Die Reihenfolge wird erst beim
-// Öffnen einer Übung in app.js gemischt, damit Inhalte und Lernweg stabil bleiben.
+// Der Fragenpool prüft konkrete Teilfertigkeiten: erkennen, unterscheiden, lesen
+// und anwenden. Automatisch erzeugte Beschreibungs- und Merksatzfragen werden
+// bewusst vermieden, weil sie nicht direkt auf flüssiges Lesen vorbereiten.
+function q(glyph,prompt,options,answer,exercise="Anwenden") {
+  return {glyph,prompt,options,answer,exercise};
+}
+
+function letterChoices(letters,current,key) {
+  const values=letters.map(letter=>letter[key]);
+  const globalValues=ALPHABET.map(letter=>letter[key]);
+  return [...new Set([current[key],...values,...globalValues])].slice(0,3);
+}
+
+function letterLessonQuestions(letterIds) {
+  const letters=letterIds.map(id=>ALPHABET.find(letter=>letter.id===id)).filter(Boolean);
+  const questions=[];
+  letters.forEach(letter=>questions.push(q(letter.letter,"Welcher Buchstabe ist das?",letterChoices(letters,letter,"name"),letter.name,"Erkennen")));
+  letters.forEach((letter,index)=>{
+    const formIndex=letter.joinsLeft?(index%3)+1:1;
+    const positions=["allein","am Wortende","in der Wortmitte","am Wortanfang"];
+    questions.push(q(letter.forms[formIndex],`Welcher Buchstabe steht hier ${positions[formIndex]}?`,letterChoices(letters,letter,"name"),letter.name,"Form im Wort"));
+  });
+  letters.forEach(letter=>questions.push(q(letter.letter,"Welcher Laut gehört zu diesem Buchstaben?",letterChoices(letters,letter,"sound"),letter.sound,"Laut zuordnen")));
+  letters.forEach(letter=>questions.push(q(letter.letter,"Kann dieser Buchstabe mit dem folgenden Buchstaben links verbunden werden?",letter.joinsLeft?["Ja","Nein","Nur mit Vokalzeichen"]:["Nein","Ja","Nur am Wortende"],letter.joinsLeft?"Ja":"Nein","Verbinden")));
+  return questions.slice(0,10);
+}
+
 LESSONS["rtl-alif"].questions = [
-  {glyph:"ا",prompt:"Welcher Buchstabe ist das?",options:["Alif","Lām","Dāl"],answer:"Alif"},
-  {glyph:"←",prompt:"In welche Richtung liest du eine arabische Zeile?",options:["Von rechts nach links","Von links nach rechts","Von unten nach oben"],answer:"Von rechts nach links"},
-  {glyph:"ا",prompt:"Welche Grundform beschreibt Alif am besten?",options:["Ein gerader Strich","Eine Schale mit Punkt","Drei kleine Zähne"],answer:"Ein gerader Strich"},
-  {glyph:"ا",prompt:"Verbindet sich Alif mit dem folgenden Buchstaben links?",options:["Nein","Ja, immer","Nur am Wortanfang"],answer:"Nein"},
-  {glyph:"ـا",prompt:"Welche Form siehst du?",options:["Alif am Wortende","Lām am Wortanfang","Dāl allein"],answer:"Alif am Wortende"},
-  {glyph:"العربية",prompt:"Wo beginnst du dieses arabische Wort zu lesen?",options:["Am rechten Rand","Am linken Rand","In der Mitte"],answer:"Am rechten Rand"},
-  {glyph:"ا",prompt:"Wie viele Punkte hat Alif?",options:["Keine","Einen darunter","Zwei darüber"],answer:"Keine"},
-  {glyph:"بَا",prompt:"Welcher Buchstabe verlängert hier den a-Laut?",options:["Alif","Bā’","Keiner"],answer:"Alif"},
-  {glyph:"ـا",prompt:"Auf welcher Seite ist Alif hier verbunden?",options:["Auf der rechten Seite","Auf der linken Seite","Auf beiden Seiten"],answer:"Auf der rechten Seite"},
-  {glyph:"ا",prompt:"Welche Form gehört zu Alif?",options:["ا","ب","ل"],answer:"ا"}
+  q("←","In welche Richtung liest du eine arabische Zeile?",["Von rechts nach links","Von links nach rechts","Von unten nach oben"],"Von rechts nach links","Leserichtung"),
+  q("ا","Welcher Buchstabe ist das?",["Alif","Lām","Dāl"],"Alif","Erkennen"),
+  q("ـا","Welcher Buchstabe steht hier am Wortende?",["Alif","Lām","Rā’"],"Alif","Form im Wort"),
+  q("بَا","Welcher Buchstabe verlängert hier den a-Laut?",["Alif","Bā’","Keiner"],"Alif","Lesen"),
+  q("بَاب","Wie oft kommt Alif in diesem Wort vor?",["Einmal","Zweimal","Gar nicht"],"Einmal","Im Wort finden"),
+  q("دَار","Welcher Buchstabe steht zwischen Dāl und Rā’?",["Alif","Lām","Wāw"],"Alif","Wort zerlegen"),
+  q("ا","Verbindet sich Alif mit dem folgenden Buchstaben links?",["Nein","Ja","Nur mit Kasra"],"Nein","Verbinden"),
+  q("با","Wo wird die Verbindung durch Alif beendet?",["Nach Alif","Vor Bā’","Nirgends"],"Nach Alif","Verbinden"),
+  q("ا ل د","Wähle Alif aus.",["ا","ل","د"],"ا","Unterscheiden"),
+  q("العربية","Wo beginnst du dieses Wort zu lesen?",["Am rechten Rand","Am linken Rand","In der Mitte"],"Am rechten Rand","Leserichtung")
 ];
-if (!LESSONS["rtl-alif"].slides.some(slide => slide.type === "quiz")) {
-  LESSONS["rtl-alif"].slides.push({type:"quiz",title:"Grundlagen festigen",body:"Prüfe Leserichtung und Alif in wechselnder Reihenfolge."});
-}
+if (!LESSONS["rtl-alif"].slides.some(slide => slide.type === "quiz")) LESSONS["rtl-alif"].slides.push({type:"quiz",title:"Erkennen und anwenden",body:"Lies von rechts und erkenne Alif allein und im Wort."});
 
-function questionOptions(answer, alternatives, fallbacks) {
-  return [...new Set([answer, ...alternatives, ...fallbacks])].slice(0, 3);
-}
+["dots","bowls","curves","teeth","throat","heads","finals"].forEach(id=>{
+  LESSONS[id].questions=letterLessonQuestions(LESSONS[id].letters);
+});
 
-const lessonPool = Object.values(LESSONS);
+const TARGETED_QUESTION_BANK = {};
 
-lessonPool.forEach(lesson => {
-  lesson.questions ||= [];
-  const addQuestion = question => {
-    const key = `${question.glyph}|${question.prompt}|${question.answer}`;
-    const exists = lesson.questions.some(item => `${item.glyph}|${item.prompt}|${item.answer}` === key);
-    if (!exists) lesson.questions.push(question);
-  };
+Object.assign(TARGETED_QUESTION_BANK,{
+  "connect-forms":[
+    q("ب","Welche Form von Bā’ siehst du?",["Allein","Am Anfang","In der Mitte"],"Allein","Position erkennen"),
+    q("بـ","Welche Form von Bā’ siehst du?",["Am Anfang","Am Ende","Allein"],"Am Anfang","Position erkennen"),
+    q("ـبـ","Welche Form von Bā’ siehst du?",["In der Mitte","Am Anfang","Am Ende"],"In der Mitte","Position erkennen"),
+    q("ـب","Welche Form von Bā’ siehst du?",["Am Ende","In der Mitte","Allein"],"Am Ende","Position erkennen"),
+    q("مـ","Welcher Buchstabe steht hier am Wortanfang?",["Mīm","Hā’","Wāw"],"Mīm","Form im Wort"),
+    q("ـمـ","Welcher Buchstabe steht hier in der Wortmitte?",["Mīm","ʿAyn","Fā’"],"Mīm","Form im Wort"),
+    q("ـن","Welcher Buchstabe steht hier am Wortende?",["Nūn","Bā’","Tā’"],"Nūn","Form im Wort"),
+    q("كِتَاب","Welcher Buchstabe steht am Wortanfang rechts?",["Kāf","Tā’","Bā’"],"Kāf","Im Wort finden"),
+    q("كَتَبَ","Welcher Buchstabe steht in der Mitte?",["Tā’","Kāf","Bā’"],"Tā’","Im Wort finden"),
+    q("عِلْم","Welcher Buchstabe steht am Wortende links?",["Mīm","ʿAyn","Lām"],"Mīm","Im Wort finden")
+  ],
+  nonjoiners:[
+    q("ا د ذ ر ز و","Welche Eigenschaft haben diese sechs Buchstaben?",["Sie verbinden nicht nach links","Sie tragen alle Punkte","Sie sind lange Vokale"],"Sie verbinden nicht nach links","Regel anwenden"),
+    q("و","Verbindet sich Wāw mit dem folgenden Buchstaben links?",["Nein","Ja","Nur mit Fatḥa"],"Nein","Verbinden"),
+    q("د","Verbindet sich Dāl mit dem folgenden Buchstaben links?",["Nein","Ja","Nur am Wortanfang"],"Nein","Verbinden"),
+    q("ب","Gehört Bā’ zu den sechs Nicht-Verbindern?",["Nein","Ja","Nur ohne Punkte"],"Nein","Unterscheiden"),
+    q("نُور","Welcher Buchstabe unterbricht nach sich die Verbindung?",["Wāw","Nūn","Rā’"],"Wāw","Im Wort finden"),
+    q("دَار","Welcher Buchstabe unterbricht die Verbindung zuerst?",["Dāl","Alif","Rā’"],"Dāl","Im Wort finden"),
+    q("زَاد","Welcher Buchstabe steht rechts und verbindet nicht nach links?",["Zāy","Alif","Dāl"],"Zāy","Im Wort finden"),
+    q("را","Warum bleiben Rā’ und Alif optisch getrennt?",["Rā’ verbindet nicht nach links","Alif hat keinen Punkt","Beide sind Vokale"],"Rā’ verbindet nicht nach links","Regel anwenden"),
+    q("بـ","Welche Form zeigt einen Buchstaben, der nach links verbindet?",["بـ","د","و"],"بـ","Unterscheiden"),
+    q("ا د ذ ر ز و","Wie viele Nicht-Verbinder musst du sicher erkennen?",["Sechs","Vier","Acht"],"Sechs","Festigen")
+  ],
+  "word-parts":[
+    q("كَتَبَ","Aus welchen Buchstaben besteht dieses Wort?",["ك + ت + ب","ب + ت + ك","ك + ب + ت"],"ك + ت + ب","Wort zerlegen"),
+    q("نُور","Aus welchen Buchstaben besteht dieses Wort?",["ن + و + ر","ر + و + ن","ن + ر + و"],"ن + و + ر","Wort zerlegen"),
+    q("قَلَم","Welcher Buchstabe steht in der Mitte?",["Lām","Qāf","Mīm"],"Lām","Im Wort finden"),
+    q("كِتَاب","Welcher Buchstabe steht am Wortende?",["Bā’","Kāf","Alif"],"Bā’","Im Wort finden"),
+    q("فِي","Welcher Buchstabe steht am Wortanfang?",["Fā’","Yā’","Kasra"],"Fā’","Im Wort finden"),
+    q("مَلِك","Wie viele Buchstaben hat dieses Wort?",["Drei","Vier","Zwei"],"Drei","Wort zerlegen"),
+    q("صَبْر","Welche Folge liest du von rechts nach links?",["Ṣād – Bā’ – Rā’","Rā’ – Bā’ – Ṣād","Ṣād – Rā’ – Bā’"],"Ṣād – Bā’ – Rā’","Leserichtung"),
+    q("عِلْم","Welcher Buchstabe steht zwischen ʿAyn und Mīm?",["Lām","Alif","Yā’"],"Lām","Im Wort finden"),
+    q("بَاب","Welcher Buchstabe kommt zweimal vor?",["Bā’","Alif","Keiner"],"Bā’","Muster erkennen"),
+    q("قُلْ","Welche zwei Buchstaben bilden das Wort?",["Qāf und Lām","Fā’ und Lām","Qāf und Nūn"],"Qāf und Lām","Wort zerlegen")
+  ],
+  "connected-reading":[
+    q("بَاب","Wie wird dieses Wort gelesen?",["bāb","bayt","nūr"],"bāb","Wort lesen"),
+    q("كِتَاب","Wie wird dieses Wort gelesen?",["kitāb","khabar","qalam"],"kitāb","Wort lesen"),
+    q("نُور","Wie wird dieses Wort gelesen?",["nūr","nās","dār"],"nūr","Wort lesen"),
+    q("قَلَم","Wie wird dieses Wort gelesen?",["qalam","qul","falaq"],"qalam","Wort lesen"),
+    q("مَلِك","Wie wird dieses Wort gelesen?",["malik","min","kitāb"],"malik","Wort lesen"),
+    q("فِي","Wie wird dieses Wort gelesen?",["fī","qul","rabb"],"fī","Wort lesen"),
+    q("عِلْم","Wie wird dieses Wort gelesen?",["ʿilm","nūr","ṣabr"],"ʿilm","Wort lesen"),
+    q("صَبْر","Wie wird dieses Wort gelesen?",["ṣabr","khabar","dār"],"ṣabr","Wort lesen"),
+    q("رَبّ","Welches Wort bedeutet „Herr · Erhalter“?",["rabb","bāb","min"],"rabb","Wortschatz"),
+    q("فَلَق","Welches Wort bedeutet „Morgendämmerung“?",["falaq","qalam","malik"],"falaq","Wortschatz")
+  ],
+  "short-vowels":[
+    q("بَ","Wie liest du diese Silbe?",["ba","bi","bu"],"ba","Silbe lesen"),
+    q("بِ","Wie liest du diese Silbe?",["bi","ba","bu"],"bi","Silbe lesen"),
+    q("بُ","Wie liest du diese Silbe?",["bu","ba","bi"],"bu","Silbe lesen"),
+    q("تَ","Wie liest du diese Silbe?",["ta","ti","tu"],"ta","Silbe lesen"),
+    q("تِ","Wie liest du diese Silbe?",["ti","ta","tu"],"ti","Silbe lesen"),
+    q("تُ","Wie liest du diese Silbe?",["tu","ta","ti"],"tu","Silbe lesen"),
+    q("قَ","Welcher kurze Vokal steht auf Qāf?",["Fatḥa · a","Kasra · i","Ḍamma · u"],"Fatḥa · a","Vokal erkennen"),
+    q("لِ","Welcher kurze Vokal steht auf Lām?",["Kasra · i","Fatḥa · a","Ḍamma · u"],"Kasra · i","Vokal erkennen"),
+    q("مُ","Welcher kurze Vokal steht auf Mīm?",["Ḍamma · u","Fatḥa · a","Kasra · i"],"Ḍamma · u","Vokal erkennen"),
+    q("بَ تِ مُ","Welche Lautfolge liest du?",["ba – ti – mu","bi – ta – ma","bu – tu – mi"],"ba – ti – mu","Folge lesen")
+  ],
+  "long-vowels":[
+    q("بَا","Wie liest du diese Silbe?",["bā","ba","bī"],"bā","Silbe lesen"),
+    q("بِي","Wie liest du diese Silbe?",["bī","bi","bū"],"bī","Silbe lesen"),
+    q("بُو","Wie liest du diese Silbe?",["bū","bu","bā"],"bū","Silbe lesen"),
+    q("قَالَ","Welcher Laut wird verlängert?",["ā","ī","ū"],"ā","Madd erkennen"),
+    q("قِيلَ","Welcher Laut wird verlängert?",["ī","ā","ū"],"ī","Madd erkennen"),
+    q("نُور","Welcher Laut wird verlängert?",["ū","ā","ī"],"ū","Madd erkennen"),
+    q("فِي","Wie wird dieses Wort gelesen?",["fī","fi","fā"],"fī","Wort lesen"),
+    q("بَاب","Wie wird dieses Wort gelesen?",["bāb","bab","bīb"],"bāb","Wort lesen"),
+    q("نَاس","Welcher Buchstabe trägt hier das lange ā?",["Alif","Nūn","Sīn"],"Alif","Madd finden"),
+    q("بَا بِ بِي","Welche Silbe enthält ein langes ī?",["بِي","بِ","بَا"],"بِي","Unterscheiden")
+  ],
+  sukun:[
+    q("بْ","Welches Zeichen steht auf Bā’?",["Sukūn","Shadda","Fatḥa"],"Sukūn","Zeichen erkennen"),
+    q("مِنْ","Welcher Buchstabe trägt Sukūn?",["Nūn","Mīm","Keiner"],"Nūn","Im Wort finden"),
+    q("قُلْ","Welcher Buchstabe trägt Sukūn?",["Lām","Qāf","Beide"],"Lām","Im Wort finden"),
+    q("لَمْ","Welcher Buchstabe trägt Sukūn?",["Mīm","Lām","Beide"],"Mīm","Im Wort finden"),
+    q("قُلْ","Wie liest du dieses Wort?",["qul","qula","qūl"],"qul","Wort lesen"),
+    q("مِنْ","Wie liest du dieses Wort?",["min","mina","mīn"],"min","Wort lesen"),
+    q("صَبْر","Welcher Buchstabe hat keinen eigenen Vokal?",["Bā’","Ṣād","Rā’"],"Bā’","Regel anwenden"),
+    q("يَلِدْ","Welcher Buchstabe endet mit Sukūn?",["Dāl","Lām","Yā’"],"Dāl","Im Wort finden"),
+    q("نَسْتَعِينُ","Welcher Buchstabe trägt das erste Sukūn?",["Sīn","Tā’","Nūn"],"Sīn","Qurʾān-Wort lesen"),
+    q("ْ","Was liest du bei Sukūn nicht zusätzlich?",["a, i oder u","den Konsonanten","den vorherigen Vokal"],"a, i oder u","Regel anwenden")
+  ],
+  shadda:[
+    q("بّ","Was zeigt das Zeichen auf Bā’?",["Bā’ wird verdoppelt","Bā’ bleibt ohne Laut","Bā’ wird langes ā"],"Bā’ wird verdoppelt","Zeichen anwenden"),
+    q("رَبّ","Welcher Buchstabe wird verdoppelt?",["Bā’","Rā’","Keiner"],"Bā’","Im Wort finden"),
+    q("إِنَّ","Welcher Buchstabe wird verdoppelt?",["Nūn","Alif","Hamza"],"Nūn","Im Wort finden"),
+    q("ثُمَّ","Welcher Buchstabe wird verdoppelt?",["Mīm","Thā’","Keiner"],"Mīm","Im Wort finden"),
+    q("رَبّ","Wie wird dieses Wort gelesen?",["rabb","rab","rāb"],"rabb","Wort lesen"),
+    q("إِنَّ","Wie wird dieses Wort gelesen?",["inna","ina","īna"],"inna","Wort lesen"),
+    q("ثُمَّ","Wie wird dieses Wort gelesen?",["thumma","thuma","thammā"],"thumma","Wort lesen"),
+    q("ٱلنَّاسِ","Auf welchem Buchstaben steht Shadda?",["Nūn","Lām","Sīn"],"Nūn","Qurʾān-Wort lesen"),
+    q("شَرِّ","Auf welchem Buchstaben steht Shadda?",["Rā’","Shīn","Beide"],"Rā’","Qurʾān-Wort lesen"),
+    q("رَبِّ","Welche Lautfolge ist richtig?",["rabbi","rabi","rābi"],"rabbi","Wort lesen")
+  ],
+  tanwin:[
+    q("بٌ","Welche Endung liest du?",["-un","-an","-in"],"-un","Endung lesen"),
+    q("بً","Welche Endung liest du?",["-an","-un","-in"],"-an","Endung lesen"),
+    q("بٍ","Welche Endung liest du?",["-in","-an","-un"],"-in","Endung lesen"),
+    q("كِتَابٌ","Wie lautet die Endung?",["-un","-an","-in"],"-un","Wortende lesen"),
+    q("كِتَابًا","Wie lautet die Endung?",["-an","-un","-in"],"-an","Wortende lesen"),
+    q("كِتَابٍ","Wie lautet die Endung?",["-in","-an","-un"],"-in","Wortende lesen"),
+    q("غَاسِقٍ","Welches Tanwīn steht am Ende?",["Kasratān","Ḍammatān","Fatḥatān"],"Kasratān","Zeichen erkennen"),
+    q("أَحَدٌ","Welches Tanwīn steht am Ende?",["Ḍammatān","Kasratān","Fatḥatān"],"Ḍammatān","Zeichen erkennen"),
+    q("كُفُوًا","Welches Tanwīn steht am Ende?",["Fatḥatān","Ḍammatān","Kasratān"],"Fatḥatān","Zeichen erkennen"),
+    q("ٌ ً ٍ","Was fügen diese Zeichen beim verbundenen Lesen hinzu?",["Einen n-Laut","Einen langen Vokal","Eine Verdopplung"],"Einen n-Laut","Regel anwenden")
+  ]
+});
 
-  (lesson.letters || []).forEach(letterId => {
-    if (lesson.questions.length >= 10) return;
-    const letter = ALPHABET.find(item => item.id === letterId);
-    if (!letter) return;
-    const letterIndex = ALPHABET.indexOf(letter);
-    const alternatives = [1, 2, 3].map(offset => ALPHABET[(letterIndex + offset) % ALPHABET.length].name);
-    addQuestion({
-      glyph:letter.letter,
-      prompt:"Wie heißt dieser Buchstabe?",
-      options:questionOptions(letter.name, alternatives, ["Andere Form"]),
-      answer:letter.name
-    });
-  });
+Object.assign(TARGETED_QUESTION_BANK,{
+  fatiha:[
+    q("بِسْمِ","Welcher Buchstabe trägt Sukūn?",["Sīn","Bā’","Mīm"],"Sīn","Vers lesen"),
+    q("ٱلْحَمْدُ","Welcher Buchstabe trägt Sukūn?",["Lām","Ḥā’","Dāl"],"Lām","Vers lesen"),
+    q("لِلَّهِ","Welcher Buchstabe wird durch Shadda verdoppelt?",["Lām","Hā’","Alif"],"Lām","Vers lesen"),
+    q("رَبِّ","Welcher Buchstabe wird verdoppelt?",["Bā’","Rā’","Yā’"],"Bā’","Vers lesen"),
+    q("ٱلْعَـٰلَمِينَ","Welcher lange Vokal steht am Wortende vor Nūn?",["ī","ā","ū"],"ī","Madd finden"),
+    q("إِيَّاكَ","Welcher Buchstabe trägt Shadda?",["Yā’","Kāf","Hamza"],"Yā’","Vers lesen"),
+    q("نَسْتَعِينُ","Welcher Buchstabe trägt das erste Sukūn?",["Sīn","Tā’","ʿAyn"],"Sīn","Vers lesen"),
+    q("ٱهْدِنَا","Welcher Buchstabe trägt Sukūn?",["Hā’","Dāl","Nūn"],"Hā’","Vers lesen"),
+    q("ٱلصِّرَٰطَ","Welcher Buchstabe trägt Shadda?",["Ṣād","Rā’","Ṭā’"],"Ṣād","Vers lesen"),
+    q("ٱلضَّآلِّينَ","Welcher Buchstabe trägt die zweite Shadda?",["Lām","Ḍād","Nūn"],"Lām","Vers lesen")
+  ],
+  ikhlas:[
+    q("قُلْ","Welcher Buchstabe trägt Sukūn?",["Lām","Qāf","Beide"],"Lām","Vers lesen"),
+    q("هُوَ","Welche kurze Vokalfolge liest du?",["huwa","hawa","hū"],"huwa","Wort lesen"),
+    q("ٱللَّهُ","Welcher Buchstabe trägt Shadda?",["Lām","Hā’","Alif"],"Lām","Vers lesen"),
+    q("أَحَدٌ","Welche Endung steht beim verbundenen Lesen?",["-un","-an","-in"],"-un","Tanwīn lesen"),
+    q("ٱلصَّمَدُ","Welcher Buchstabe trägt Shadda?",["Ṣād","Mīm","Dāl"],"Ṣād","Vers lesen"),
+    q("لَمْ","Welcher Buchstabe trägt Sukūn?",["Mīm","Lām","Keiner"],"Mīm","Vers lesen"),
+    q("يَلِدْ","Welcher Buchstabe trägt Sukūn?",["Dāl","Lām","Yā’"],"Dāl","Vers lesen"),
+    q("يُولَدْ","Welcher lange Vokal steht nach Yā’?",["ū","ā","ī"],"ū","Madd finden"),
+    q("كُفُوًا","Welche Tanwīn-Endung steht am Wortende?",["-an","-un","-in"],"-an","Tanwīn lesen"),
+    q("أَحَدْ","Welcher Buchstabe erhält beim Anhalten Qalqala?",["Dāl","Ḥā’","Alif"],"Dāl","وقف anwenden")
+  ],
+  falaq:[
+    q("قُلْ","Wie wird dieses Wort gelesen?",["qul","qūl","qala"],"qul","Wort lesen"),
+    q("أَعُوذُ","Welcher lange Vokal steht in der Wortmitte?",["ū","ā","ī"],"ū","Madd finden"),
+    q("بِرَبِّ","Welcher Buchstabe trägt Shadda?",["Bā’","Rā’","Beide"],"Bā’","Vers lesen"),
+    q("ٱلْفَلَقِ","Welcher Buchstabe trägt Sukūn?",["Lām","Fā’","Qāf"],"Lām","Vers lesen"),
+    q("شَرِّ","Welcher Buchstabe wird verdoppelt?",["Rā’","Shīn","Beide"],"Rā’","Vers lesen"),
+    q("مَا","Welcher lange Vokal steht hier?",["ā","ī","ū"],"ā","Madd finden"),
+    q("غَاسِقٍ","Welche Tanwīn-Endung steht am Wortende?",["-in","-un","-an"],"-in","Tanwīn lesen"),
+    q("ٱلنَّفَّـٰثَـٰتِ","Welche Buchstaben tragen Shadda?",["Nūn und Fā’","Fā’ und Thā’","Nūn und Tā’"],"Nūn und Fā’","Vers lesen"),
+    q("ٱلْعُقَدِ","Welcher Buchstabe trägt Sukūn?",["Lām","ʿAyn","Qāf"],"Lām","Vers lesen"),
+    q("حَاسِدٍ","Welche Endung liest du beim Verbinden?",["-in","-an","-un"],"-in","Tanwīn lesen")
+  ],
+  nas:[
+    q("قُلْ","Welcher Buchstabe trägt Sukūn?",["Lām","Qāf","Beide"],"Lām","Vers lesen"),
+    q("أَعُوذُ","Wie wird der lange Vokal gelesen?",["ū","ā","ī"],"ū","Madd finden"),
+    q("ٱلنَّاسِ","Welcher Buchstabe trägt Shadda?",["Nūn","Sīn","Lām"],"Nūn","Vers lesen"),
+    q("مَلِكِ","Wie wird dieses Wort gelesen?",["maliki","māliki","mulki"],"maliki","Wort lesen"),
+    q("إِلَـٰهِ","Welcher lange Vokal steht nach Lām?",["ā","ī","ū"],"ā","Madd finden"),
+    q("ٱلْوَسْوَاسِ","Welcher Buchstabe zwischen den beiden Wāw trägt Sukūn?",["Sīn","Wāw","Lām"],"Sīn","Vers lesen"),
+    q("ٱلْخَنَّاسِ","Welcher Buchstabe trägt Shadda?",["Nūn","Khā’","Sīn"],"Nūn","Vers lesen"),
+    q("صُدُورِ","Welcher lange Vokal ist enthalten?",["ū","ā","ī"],"ū","Madd finden"),
+    q("ٱلْجِنَّةِ","Welcher Buchstabe trägt Shadda?",["Nūn","Jīm","Tā’ marbūṭa"],"Nūn","Vers lesen"),
+    q("وَٱلنَّاسِ","Wie wird Hamzat al-Waṣl nach Wāw behandelt?",["Ohne neuen Hamza-Ansatz verbinden","Mit langer Pause lesen","Als langes ā lesen"],"Ohne neuen Hamza-Ansatz verbinden","Verbunden lesen")
+  ]
+});
 
-  const examples = lesson.slides.find(slide => slide.type === "examples")?.examples || [];
-  const labels = examples.map(example => example.label).filter(Boolean);
-  const notes = examples.map(example => example.note).filter(Boolean);
-  examples.forEach(example => {
-    if (lesson.questions.length < 10 && example.label) {
-      addQuestion({
-        glyph:example.arabic,
-        prompt:"Welche Bezeichnung passt zu diesem Beispiel?",
-        options:questionOptions(example.label, labels.filter(label => label !== example.label), ["Keine der genannten","Andere Form"]),
-        answer:example.label
-      });
-    }
-    if (lesson.questions.length < 10 && example.label) {
-      addQuestion({
-        glyph:example.label,
-        prompt:"Welches Schriftbild gehört zu dieser Bezeichnung?",
-        options:questionOptions(example.arabic, examples.filter(item => item !== example).map(item => item.arabic), ["Keines dieser Beispiele","Andere Form"]),
-        answer:example.arabic
-      });
-    }
-    if (lesson.questions.length < 10 && example.note) {
-      addQuestion({
-        glyph:example.arabic,
-        prompt:"Welche Beschreibung passt zu diesem Beispiel?",
-        options:questionOptions(example.note, notes.filter(note => note !== example.note), ["Keine dieser Aussagen","Andere Regel"]),
-        answer:example.note
-      });
-    }
-  });
+Object.assign(TARGETED_QUESTION_BANK,{
+  hamza:[
+    q("ء","Wie heißt dieses Zeichen?",["Hamza","Sukūn","Shadda"],"Hamza","Zeichen erkennen"),
+    q("أ","Wo steht Hamza?",["Über Alif","Unter Alif","Auf Wāw"],"Über Alif","Träger erkennen"),
+    q("إ","Wo steht Hamza?",["Unter Alif","Über Alif","Auf Yā’"],"Unter Alif","Träger erkennen"),
+    q("ؤ","Welcher Buchstabe trägt Hamza?",["Wāw","Alif","Yā’"],"Wāw","Träger erkennen"),
+    q("ئ","Welcher Buchstabe trägt Hamza?",["Yā’-Träger","Wāw","Alif"],"Yā’-Träger","Träger erkennen"),
+    q("أَ","Wie liest du diese Silbe?",["ʾa","ʾi","ʾu"],"ʾa","Silbe lesen"),
+    q("إِ","Wie liest du diese Silbe?",["ʾi","ʾa","ʾu"],"ʾi","Silbe lesen"),
+    q("أُ","Wie liest du diese Silbe?",["ʾu","ʾa","ʾi"],"ʾu","Silbe lesen"),
+    q("أَحَدٌ","Mit welchem Laut beginnt das Wort?",["Hamza mit Fatḥa","ʿAyn mit Fatḥa","Alif-Madd"],"Hamza mit Fatḥa","Qurʾān-Wort lesen"),
+    q("إِيَّاكَ","Welches Zeichen steht am Wortanfang?",["Hamza unter Alif","Hamzat al-Waṣl","Alif maqṣūra"],"Hamza unter Alif","Qurʾān-Wort lesen")
+  ],
+  "hamzat-wasl":[
+    q("ٱ","Wie heißt dieses Zeichen?",["Hamzat al-Waṣl","Hamzat al-Qaṭʿ","Alif maqṣūra"],"Hamzat al-Waṣl","Zeichen erkennen"),
+    q("ٱلْحَمْدُ","Was geschieht mit Hamzat al-Waṣl, wenn du hier beginnst?",["Es wird gesprochen","Es wird ausgelassen","Es wird verlängert"],"Es wird gesprochen","Am Anfang lesen"),
+    q("بِسْمِ ٱللَّهِ","Was geschieht beim Verbinden vor ٱللَّهِ?",["Kein neuer Hamza-Ansatz","Eine lange Pause","Ein n-Laut wird ergänzt"],"Kein neuer Hamza-Ansatz","Verbunden lesen"),
+    q("وَٱلْفَلَقِ","Wird nach وَ ein neuer Hamza-Ansatz gesprochen?",["Nein","Ja","Nur bei Sukūn"],"Nein","Verbunden lesen"),
+    q("ٱلنَّاسِ","Welches Zeichen steht am Wortanfang?",["Hamzat al-Waṣl","Hamza unter Alif","Alif maqṣūra"],"Hamzat al-Waṣl","Im Wort finden"),
+    q("ٱلرَّحْمَـٰنِ","Welcher Teil wird beim Beginn hörbar angesetzt?",["Hamzat al-Waṣl","Tanwīn","Tā’ marbūṭa"],"Hamzat al-Waṣl","Am Anfang lesen"),
+    q("مِنَ ٱلْجِنَّةِ","Wie liest du den Übergang?",["Ohne neuen Hamza-Ansatz","Mit vollständiger Pause","Mit langem ā"],"Ohne neuen Hamza-Ansatz","Verbunden lesen"),
+    q("أَ / ٱ","Welches Zeichen bleibt auch beim Verbinden als Hamza hörbar?",["أ","ٱ","Beide fallen aus"],"أ","Unterscheiden"),
+    q("ٱهْدِنَا","Was gilt, wenn du mit diesem Wort beginnst?",["Hamzat al-Waṣl wird gesprochen","Alif bleibt stumm","Das Wort beginnt mit Madd"],"Hamzat al-Waṣl wird gesprochen","Am Anfang lesen"),
+    q("وَٱلنَّاسِ","Welcher Buchstabe führt direkt in ٱلنَّاسِ hinein?",["Wāw","Alif","Nūn"],"Wāw","Verbunden lesen")
+  ],
+  "ta-marbuta":[
+    q("ة","Wie heißt diese Endform?",["Tā’ marbūṭa","Hā’","Alif maqṣūra"],"Tā’ marbūṭa","Zeichen erkennen"),
+    q("ـة","Wo kann diese Form stehen?",["Am Wortende","Am Wortanfang","In der Wortmitte"],"Am Wortende","Position erkennen"),
+    q("رَحْمَةٌ","Welcher Buchstabe steht am Wortende?",["Tā’ marbūṭa","Hā’","Tā’ offen"],"Tā’ marbūṭa","Im Wort finden"),
+    q("سُورَةٌ","Welcher Buchstabe steht am Wortende?",["Tā’ marbūṭa","Hā’","Alif maqṣūra"],"Tā’ marbūṭa","Im Wort finden"),
+    q("رَحْمَةٌ","Welcher Laut wird beim verbundenen Lesen der Endung hörbar?",["t","h","y"],"t","Verbunden lesen"),
+    q("رَحْمَةْ","Wie klingt Tā’ marbūṭa beim Anhalten gewöhnlich?",["wie h","wie t mit Fatḥa","wie langes ā"],"wie h","Beim وقف lesen"),
+    q("ة / ه","Welche Form ist Tā’ marbūṭa?",["ة","ه","Beide"],"ة","Unterscheiden"),
+    q("جَنَّةٌ","Welches Zeichen beendet das Wort?",["Tā’ marbūṭa","Hā’","Tā’ offen"],"Tā’ marbūṭa","Qurʾān-Wort lesen"),
+    q("ٱلْجِنَّةِ","Welche Endform trägt Kasra?",["Tā’ marbūṭa","Nūn","Hā’"],"Tā’ marbūṭa","Im Wort finden"),
+    q("بَيْت / رَحْمَة","In welchem Wort steht Tā’ marbūṭa?",["رَحْمَة","بَيْت","In beiden"],"رَحْمَة","Unterscheiden")
+  ],
+  "alif-maqsura":[
+    q("ى","Wie heißt diese Endform?",["Alif maqṣūra","Yā’","Tā’ marbūṭa"],"Alif maqṣūra","Zeichen erkennen"),
+    q("هُدَى","Wie wird der letzte Laut gesprochen?",["langes ā","y","kurzes i"],"langes ā","Wortende lesen"),
+    q("عَلَى","Wie wird dieses Wort gelesen?",["ʿalā","ʿalay","ʿali"],"ʿalā","Wort lesen"),
+    q("مُوسَى","Wie wird dieses Wort gelesen?",["Mūsā","Mūsy","Mūsi"],"Mūsā","Wort lesen"),
+    q("ى / ي","Welche Form ist Alif maqṣūra?",["ى","ي","Beide"],"ى","Unterscheiden"),
+    q("هُدَى","Wo steht Alif maqṣūra?",["Am Wortende","Am Wortanfang","In der Mitte"],"Am Wortende","Position erkennen"),
+    q("فِي / عَلَى","Welches Wort endet mit Alif maqṣūra?",["عَلَى","فِي","Beide"],"عَلَى","Unterscheiden"),
+    q("مُوسَى","Welche Buchstabenform steht ganz links?",["Alif maqṣūra","Yā’ mit Punkten","Alif normal"],"Alif maqṣūra","Im Wort finden"),
+    q("ى","Trägt Alif maqṣūra zwei Punkte?",["Nein","Ja","Nur im Wortinneren"],"Nein","Unterscheiden"),
+    q("هُدَى / هُدِيَ","In welchem Wort endet der Laut mit langem ā?",["هُدَى","هُدِيَ","In beiden"],"هُدَى","Wortende lesen")
+  ],
+  waqf:[
+    q("م","Was bedeutet dieses Waqf-Zeichen?",["Anhalten","Nicht anhalten","Nur leiser lesen"],"Anhalten","Pausenzeichen"),
+    q("لا","Was bedeutet dieses Waqf-Zeichen?",["Hier nicht anhalten","Unbedingt anhalten","Vers wiederholen"],"Hier nicht anhalten","Pausenzeichen"),
+    q("ج","Was erlaubt dieses Waqf-Zeichen?",["Pause oder Fortsetzung","Nur Pause","Keine Pause"],"Pause oder Fortsetzung","Pausenzeichen"),
+    q("م","Welche Handlung passt?",["Atem holen und sinnvoll anhalten","Ohne Pause weiterlesen","Wort auslassen"],"Atem holen und sinnvoll anhalten","Anwenden"),
+    q("لا","Welche Handlung passt?",["Nach Möglichkeit weiterlesen","Sofort beenden","Zum Versanfang springen"],"Nach Möglichkeit weiterlesen","Anwenden"),
+    q("ج","Welche Handlung passt?",["Beides ist möglich","Nur verbinden","Nur zurückgehen"],"Beides ist möglich","Anwenden"),
+    q("م لا ج","Welches Zeichen zeigt einen notwendigen Halt?",["م","لا","ج"],"م","Unterscheiden"),
+    q("م لا ج","Welches Zeichen rät vom Halt ab?",["لا","م","ج"],"لا","Unterscheiden"),
+    q("م لا ج","Bei welchem Zeichen sind Pause und Fortsetzung erlaubt?",["ج","م","لا"],"ج","Unterscheiden"),
+    q("ج","Was musst du trotz des Zeichens beachten?",["Sinn und Atemführung","Punktzahl des Buchstabens","Schreibrichtung"],"Sinn und Atemführung","Leseverständnis")
+  ],
+  makharij:[
+    q("ء ه ع ح غ خ","Zu welcher Hauptregion gehören diese Buchstaben?",["Rachen","Lippen","Nur Nasenraum"],"Rachen","Artikulationsort"),
+    q("ب م و","Welche Körperregion ist besonders beteiligt?",["Lippen","Rachen","Zähne allein"],"Lippen","Artikulationsort"),
+    q("ع ح","Wo werden diese Laute gebildet?",["Im Rachen","An beiden Lippen","Nur an der Nasenspitze"],"Im Rachen","Artikulationsort"),
+    q("ف","Woran sind die Lippen bei Fā’ beteiligt?",["Unterlippe und obere Schneidezähne","Beide Lippen geschlossen","Keine Lippenbeteiligung"],"Unterlippe und obere Schneidezähne","Artikulationsort"),
+    q("ب","Wie wird Bā’ gebildet?",["Mit beiden Lippen","Tief im Rachen","Mit der Zungenmitte allein"],"Mit beiden Lippen","Artikulationsort"),
+    q("م","Wie wird Mīm gebildet?",["Mit beiden Lippen","Mit der Zungenspitze an den Zähnen","Im tiefen Rachen"],"Mit beiden Lippen","Artikulationsort"),
+    q("ق","Welcher Bereich ist besonders beteiligt?",["Hinterer Zungenbereich","Beide Lippen","Vorderzähne allein"],"Hinterer Zungenbereich","Artikulationsort"),
+    q("ل","Welches Organ ist zentral für die Bildung?",["Zunge","Nur Lippen","Nur Nasenraum"],"Zunge","Artikulationsort"),
+    q("ن","Welcher zusätzliche Klangraum begleitet Nūn?",["Nasenraum","Hohlraum allein","Lippenraum"],"Nasenraum","Artikulationsort"),
+    q("ح / ه","Warum ist Hörkorrektur durch eine Lehrperson wichtig?",["Die Laute entstehen an unterschiedlichen Stellen","Beide Zeichen sind gleich","Nur die Schriftgröße unterscheidet sie"],"Die Laute entstehen an unterschiedlichen Stellen","Aussprache prüfen")
+  ],
+  qalqala:[
+    q("ق ط ب ج د","Welche Gruppe siehst du?",["Qalqala-Buchstaben","Madd-Buchstaben","Nicht-Verbinder"],"Qalqala-Buchstaben","Gruppe erkennen"),
+    q("دْ","Wann wird Qalqala hörbar?",["Wenn Dāl Sukūn trägt","Bei jeder Fatḥa","Nur bei Tanwīn"],"Wenn Dāl Sukūn trägt","Regel anwenden"),
+    q("أَحَدْ","Welcher Buchstabe erhält beim وقف Qalqala?",["Dāl","Ḥā’","Alif"],"Dāl","Im Wort finden"),
+    q("يَلِدْ","Welcher Buchstabe trägt Qalqala?",["Dāl","Lām","Yā’"],"Dāl","Im Wort finden"),
+    q("خَلَقْ","Welcher Buchstabe erhält beim وقف Qalqala?",["Qāf","Lām","Khā’"],"Qāf","Im Wort finden"),
+    q("قُلْ","Gibt es hier Qalqala?",["Nein","Ja, auf Qāf","Ja, auf Lām"],"Nein","Unterscheiden"),
+    q("بْ","Welche Wirkung ist richtig?",["Kurzer Widerhall ohne vollen Vokal","Langes ā","Vollständiges ba"],"Kurzer Widerhall ohne vollen Vokal","Regel anwenden"),
+    q("طْ","Was darf nicht ergänzt werden?",["Ein voller a-, i- oder u-Vokal","Ein kurzer Widerhall","Der Konsonant Ṭā’"],"Ein voller a-, i- oder u-Vokal","Fehler vermeiden"),
+    q("مْ / دْ","Welche Form kann Qalqala erhalten?",["دْ","مْ","Beide"],"دْ","Unterscheiden"),
+    q("قْ طْ بْ جْ دْ","Was haben alle Formen gemeinsam?",["Qalqala-Buchstabe mit Sukūn","Langer Vokal","Tanwīn-Endung"],"Qalqala-Buchstabe mit Sukūn","Regel erkennen")
+  ],
+  "nun-rules":[
+    q("نْ + ب","Welche Regel gilt?",["Iqlāb","Iẓhār","Idghām"],"Iqlāb","Regel bestimmen"),
+    q("مِنۢ بَعْدِ","Welche Regel wird angewendet?",["Iqlāb","Ikhfā’","Madd"],"Iqlāb","Qurʾān-Beispiel"),
+    q("نْ + ه","Welche Regel gilt?",["Iẓhār","Iqlāb","Idghām"],"Iẓhār","Regel bestimmen"),
+    q("مِنْ هَادٍ","Welche Regel wird angewendet?",["Iẓhār","Iqlāb","Ikhfā’"],"Iẓhār","Qurʾān-Beispiel"),
+    q("نْ + ي","Welche Regelgruppe gilt?",["Idghām","Iqlāb","Qalqala"],"Idghām","Regel bestimmen"),
+    q("مَنْ يَعْمَلْ","Welche Regel folgt auf Nūn sākin vor Yā’?",["Idghām","Iẓhār","Iqlāb"],"Idghām","Qurʾān-Beispiel"),
+    q("نْ + ت","Welche Regel gilt?",["Ikhfā’","Iqlāb","Madd"],"Ikhfā’","Regel bestimmen"),
+    q("مِنْ تَحْتِهَا","Welche Regel wird angewendet?",["Ikhfā’","Iẓhār","Idghām"],"Ikhfā’","Qurʾān-Beispiel"),
+    q("نْ + ب","In welchen Klang wird Nūn bei Iqlāb gewandelt?",["m-Klang mit Ghunnah","langes ā","klarer l-Laut"],"m-Klang mit Ghunnah","Regel anwenden"),
+    q("نْ / ٌ ٍ ً","Was entscheidet über die Regel?",["Der folgende Buchstabe","Die Schriftgröße","Die Wortlänge"],"Der folgende Buchstabe","Regel anwenden")
+  ],
+  "mim-rules":[
+    q("مْ + م","Welche Regel gilt?",["Idghām shafawī","Ikhfā’ shafawī","Iẓhār shafawī"],"Idghām shafawī","Regel bestimmen"),
+    q("هُم مَّا","Welche Regel wird angewendet?",["Idghām shafawī","Ikhfā’ shafawī","Qalqala"],"Idghām shafawī","Beispiel anwenden"),
+    q("مْ + ب","Welche Regel gilt?",["Ikhfā’ shafawī","Idghām shafawī","Iẓhār shafawī"],"Ikhfā’ shafawī","Regel bestimmen"),
+    q("تَرْمِيهِمْ بِحِجَارَةٍ","Welche Regel wird angewendet?",["Ikhfā’ shafawī","Idghām shafawī","Madd"],"Ikhfā’ shafawī","Qurʾān-Beispiel"),
+    q("مْ + ف","Welche Regel gilt?",["Iẓhār shafawī","Ikhfā’ shafawī","Idghām shafawī"],"Iẓhār shafawī","Regel bestimmen"),
+    q("هُمْ فِيهَا","Welche Regel wird angewendet?",["Iẓhār shafawī","Ikhfā’ shafawī","Idghām shafawī"],"Iẓhār shafawī","Beispiel anwenden"),
+    q("مْ + م","Was geschieht mit den beiden Mīm-Lauten?",["Sie verschmelzen mit Ghunnah","Sie werden zu Bā’","Sie werden langes ā"],"Sie verschmelzen mit Ghunnah","Regel anwenden"),
+    q("مْ + ب","Wie wird Mīm gelesen?",["Verborgen an den Lippen mit Ghunnah","Vollständig ausgelassen","Als Nūn"],"Verborgen an den Lippen mit Ghunnah","Regel anwenden"),
+    q("مْ + ل","Welche Regel gilt vor Lām?",["Iẓhār shafawī","Ikhfā’ shafawī","Idghām shafawī"],"Iẓhār shafawī","Regel bestimmen"),
+    q("مْ","Was entscheidet über die Regel?",["Der folgende Buchstabe","Der vorherige lange Vokal","Die Versnummer"],"Der folgende Buchstabe","Regel anwenden")
+  ],
+  madd:[
+    q("َ + ا","Welcher lange Vokal entsteht?",["ā","ī","ū"],"ā","Madd bilden"),
+    q("ِ + يْ","Welcher lange Vokal entsteht?",["ī","ā","ū"],"ī","Madd bilden"),
+    q("ُ + وْ","Welcher lange Vokal entsteht?",["ū","ā","ī"],"ū","Madd bilden"),
+    q("قَالَ","Welcher Madd-Laut steht im Wort?",["ā","ī","ū"],"ā","Im Wort finden"),
+    q("قِيلَ","Welcher Madd-Laut steht im Wort?",["ī","ā","ū"],"ī","Im Wort finden"),
+    q("يَقُولُ","Welcher Madd-Laut steht im Wort?",["ū","ā","ī"],"ū","Im Wort finden"),
+    q("مَدّ طبيعي","Wie lange dauert der natürliche Madd?",["Zwei Zählzeiten","Eine Zählzeit","Immer sechs Zählzeiten"],"Zwei Zählzeiten","Länge anwenden"),
+    q("بَ / بَا","Welche Silbe wird zwei Zählzeiten gehalten?",["بَا","بَ","Beide gleich"],"بَا","Unterscheiden"),
+    q("فِي","Welcher Buchstabe trägt den langen ī-Laut?",["Yā’","Fā’","Kasra allein"],"Yā’","Im Wort finden"),
+    q("نُور","Welcher Buchstabe trägt den langen ū-Laut?",["Wāw","Nūn","Rā’"],"Wāw","Im Wort finden")
+  ]
+});
 
-  const points = lesson.slides.find(slide => slide.type === "concept")?.points || [];
-  const otherLessonTitles = lessonPool.filter(item => item !== lesson).map(item => item.title);
-  points.forEach((point, pointIndex) => {
-    if (lesson.questions.length >= 10) return;
-    addQuestion({
-      glyph:point,
-      prompt:"Zu welcher Lektion gehört dieser Merksatz?",
-      options:questionOptions(lesson.title, [otherLessonTitles[pointIndex % otherLessonTitles.length], otherLessonTitles[(pointIndex + 7) % otherLessonTitles.length]], ["Andere Lektion"]),
-      answer:lesson.title
-    });
-  });
+Object.entries(TARGETED_QUESTION_BANK).forEach(([id,questions])=>{
+  LESSONS[id].questions=questions;
+});
 
-  // Buchstabenlektionen erhalten zusätzlich Laut-Aufgaben, bis zehn Varianten erreicht sind.
-  (lesson.letters || []).forEach(letterId => {
-    if (lesson.questions.length >= 10) return;
-    const letter = ALPHABET.find(item => item.id === letterId);
-    if (!letter) return;
-    const letterIndex = ALPHABET.indexOf(letter);
-    const alternatives = [1, 2, 3].map(offset => ALPHABET[(letterIndex + offset) % ALPHABET.length].sound);
-    addQuestion({
-      glyph:letter.letter,
-      prompt:"Welcher Laut gehört zu diesem Buchstaben?",
-      options:questionOptions(letter.sound, alternatives, ["Anderer Laut"]),
-      answer:letter.sound
-    });
-  });
+Object.values(LESSONS).forEach(lesson=>{
+  const quiz=lesson.slides.find(slide=>slide.type==="quiz");
+  if(quiz){quiz.title="Erkennen, lesen und anwenden";quiz.body="Bearbeite zehn praktische Aufgaben zum Lernziel dieser Lektion.";}
 });
 
 // Jeder Buchstabe wird auch innerhalb seiner Kurslektion geschrieben.
