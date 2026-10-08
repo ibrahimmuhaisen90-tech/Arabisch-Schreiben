@@ -38,7 +38,7 @@ function feedbackText() {
   const category=document.querySelector("#feedbackCategory").value;
   const rating=document.querySelector('[name="feedbackRating"]:checked')?.value||"–";
   const message=document.querySelector("#feedbackMessage").value.trim();
-  return `Kategorie: ${category}\nBewertung: ${rating} von 5\nBereich: ${state.view}${state.lessonId?` · ${LESSONS[state.lessonId]?.title||state.lessonId}`:""}\n\n${message}`;
+  return `Kategorie: ${category}\nBewertung: ${rating} von 5\nBereich: ${state.view}${state.view==="lesson"&&state.lessonId?` · ${LESSONS[state.lessonId]?.title||state.lessonId}`:""}\n\n${message}`;
 }
 function openFeedback() {
   const dialog=document.querySelector("#feedbackDialog"),message=document.querySelector("#feedbackMessage");
@@ -63,9 +63,7 @@ function submitFeedback(event) {
   const category=document.querySelector("#feedbackCategory").value;
   const url=new URL("https://github.com/ibrahimmuhaisen90-tech/Arabisch-Schreiben/issues/new");
   url.searchParams.set("title",`Feedback: ${category}`);url.searchParams.set("body",feedbackText());
-  localStorage.removeItem(FEEDBACK_DRAFT_KEY);
-  window.open(url.toString(),"_blank","noopener,noreferrer");
-  document.querySelector("#feedbackStatus").textContent="Die vorbereitete Rückmeldung wurde in GitHub geöffnet. Dort kannst du sie noch prüfen und absenden.";
+  window.location.assign(url.toString());
 }
 
 const viewLabels = {
@@ -408,4 +406,4 @@ document.querySelectorAll("[data-close]").forEach(button=>button.addEventListene
 document.querySelectorAll("dialog").forEach(dialog=>dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()}));
 document.querySelector("#streakValue").textContent=state.progress.streak;
 if(PREVIEW_ALL)setView("path");else renderHome();
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));
+if("serviceWorker" in navigator)window.addEventListener("load",async()=>{try{const registration=await navigator.serviceWorker.register("./service-worker.js",{updateViaCache:"none"});await registration.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")registration.update()})}catch(error){console.warn("App-Update konnte nicht geprüft werden.",error)}});

@@ -21,11 +21,21 @@ if (Object.keys(LESSONS).length !== 31) errors.push(`Kurs: ${Object.keys(LESSONS
 
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const serviceWorker = fs.readFileSync("service-worker.js", "utf8");
+const appSource = fs.readFileSync("app.js", "utf8");
 for (const asset of ["styles.css", "content.js", "curriculum.js", "app.js"]) {
   const versionedAsset = indexHtml.match(new RegExp(`${asset.replace(".", "\\.")}\\?v=\\d+`))?.[0];
   if (!versionedAsset || !serviceWorker.includes(versionedAsset)) {
     errors.push(`Offline-Cache: ${asset} stimmt nicht mit index.html überein.`);
   }
+}
+if (!serviceWorker.includes('event.request.mode === "navigate"') || !serviceWorker.includes('cache:"no-store"')) {
+  errors.push("App-Update: Navigation verwendet nicht die aktuelle Online-Version.");
+}
+if (!serviceWorker.includes("client.navigate(client.url)") || !appSource.includes('updateViaCache:"none"')) {
+  errors.push("App-Update: automatische Aktivierung ist unvollständig.");
+}
+if (appSource.includes("window.open(url.toString()") || !appSource.includes("window.location.assign(url.toString())")) {
+  errors.push("Feedback: GitHub-Weiterleitung kann im App-Modus blockiert werden.");
 }
 
 for (const [lessonId, lesson] of Object.entries(LESSONS)) {

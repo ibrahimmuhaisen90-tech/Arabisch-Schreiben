@@ -32,6 +32,7 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - responsive Oberfläche für iPad, Smartphone und Desktop
 - eigenes App-Logo und passende Home-Bildschirm-Symbole für iPad und PWA
 - integriertes Feedback-Feld mit Kategorie, Bewertung, Freitext, Kopierfunktion und vorbereiteter GitHub-Rückmeldung
+- automatische Versionsprüfung beim Start und bei Rückkehr in die App; neue Online-Versionen ersetzen den alten Offline-Cache selbstständig
 
 ## Audio- und Koraninhalte
 
