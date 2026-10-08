@@ -31,6 +31,7 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - Offline-Unterstützung als Progressive Web App
 - responsive Oberfläche für iPad, Smartphone und Desktop
 - eigenes App-Logo und passende Home-Bildschirm-Symbole für iPad und PWA
+- integriertes Feedback-Feld mit Kategorie, Bewertung, Freitext, Kopierfunktion und vorbereiteter GitHub-Rückmeldung
 
 ## Audio- und Koraninhalte
 

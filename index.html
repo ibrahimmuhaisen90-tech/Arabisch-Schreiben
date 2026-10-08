@@ -12,7 +12,7 @@
     <link rel="icon" href="./assets/app-icon-192.png" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/app-icon-180.png" />
     <title>Arabisch Schreiben</title>
-    <link rel="stylesheet" href="./styles.css?v=11" />
+    <link rel="stylesheet" href="./styles.css?v=12" />
   </head>
   <body>
     <div class="app-shell">
@@ -28,7 +28,10 @@
           <button class="nav-item" data-view="practice"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8m-8 4h5m-5 4h3"/></svg><span>Üben</span></button>
         </nav>
         <div class="side-goal"><span class="goal-icon">◒</span><div><small>Kursziel</small><strong>Koran lesen</strong></div></div>
-        <button class="side-help" id="sourceButton">Quellen &amp; Qualität</button>
+        <div class="side-support">
+          <button class="side-help" id="sourceButton">Quellen &amp; Qualität</button>
+          <button class="side-help" data-feedback-open>Feedback geben</button>
+        </div>
       </aside>
       <div class="main-column">
         <header class="topbar">
@@ -36,11 +39,12 @@
           <div class="topbar-copy"><strong id="topbarTitle">Start</strong><span id="topbarSubtitle">Dein persönlicher Lernweg</span></div>
           <div class="top-actions">
             <div class="streak" title="Lernserie"><span>◇</span><strong id="streakValue">1</strong><small>Tag</small></div>
+            <button class="icon-button" data-feedback-open aria-label="Feedback geben" title="Feedback geben"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4zM8 9h8m-8 3h5"/></svg></button>
             <button class="icon-button" id="installButton" aria-label="Installationshilfe öffnen" title="App installieren"><svg viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></button>
           </div>
         </header>
         <main id="appMain" tabindex="-1"></main>
-        <footer><span>Arabisch Schreiben</span><span>Fortschritt wird nur auf diesem Gerät gespeichert.</span></footer>
+        <footer><span>Arabisch Schreiben</span><span>Fortschritt wird nur auf diesem Gerät gespeichert.</span><button class="footer-feedback" data-feedback-open>Feedback geben</button></footer>
       </div>
     </div>
     <nav class="bottom-nav" aria-label="Mobile Navigation">
@@ -72,8 +76,21 @@
       </div>
       <p class="note">Audio und vollständige Korantexte werden erst aktiviert, wenn Quelle, Lizenz und technische Bereitstellung geklärt sind.</p>
     </dialog>
+    <dialog id="feedbackDialog" class="modal feedback-modal">
+      <button class="dialog-close" data-close="feedbackDialog" aria-label="Schließen">×</button>
+      <p class="eyebrow">Hilf uns beim Verbessern</p><h2>Feedback geben</h2>
+      <p class="feedback-intro">Melde einen Fehler, eine unklare Aufgabe oder einen Verbesserungsvorschlag.</p>
+      <form id="feedbackForm">
+        <label class="feedback-field"><span>Kategorie</span><select id="feedbackCategory" required><option value="Fehler in einer Lektion">Fehler in einer Lektion</option><option value="Unklare Aufgabe">Unklare Aufgabe</option><option value="Verbesserungsvorschlag">Verbesserungsvorschlag</option><option value="Technisches Problem">Technisches Problem</option><option value="Sonstiges">Sonstiges</option></select></label>
+        <fieldset class="feedback-rating"><legend>Wie hilfreich ist die App bisher?</legend><div><label><input type="radio" name="feedbackRating" value="1"><span>1</span></label><label><input type="radio" name="feedbackRating" value="2"><span>2</span></label><label><input type="radio" name="feedbackRating" value="3"><span>3</span></label><label><input type="radio" name="feedbackRating" value="4"><span>4</span></label><label><input type="radio" name="feedbackRating" value="5" checked><span>5</span></label></div><small>1 = wenig hilfreich · 5 = sehr hilfreich</small></fieldset>
+        <label class="feedback-field"><span>Deine Rückmeldung</span><textarea id="feedbackMessage" rows="6" maxlength="1500" placeholder="Was ist dir aufgefallen? In welcher Lektion warst du?" required></textarea><small><b id="feedbackCount">0</b> / 1500 Zeichen</small></label>
+        <p class="feedback-privacy">Es werden weder Lernfortschritt noch persönliche Daten automatisch mitgesendet.</p>
+        <div class="feedback-actions"><button type="button" class="secondary-button" id="copyFeedback">Text kopieren</button><button type="submit" class="primary-button">Auf GitHub öffnen</button></div>
+        <div class="feedback-status" id="feedbackStatus" role="status" aria-live="polite"></div>
+      </form>
+    </dialog>
     <script src="./content.js?v=14" defer></script>
     <script src="./curriculum.js?v=13" defer></script>
-    <script src="./app.js?v=14" defer></script>
+    <script src="./app.js?v=15" defer></script>
   </body>
 </html>

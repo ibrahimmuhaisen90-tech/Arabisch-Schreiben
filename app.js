@@ -33,6 +33,41 @@ function updateVisit() {
 function saveProgress() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress)); }
 updateVisit();
 
+const FEEDBACK_DRAFT_KEY = "arabisch-schreiben.feedback-draft-v1";
+function feedbackText() {
+  const category=document.querySelector("#feedbackCategory").value;
+  const rating=document.querySelector('[name="feedbackRating"]:checked')?.value||"–";
+  const message=document.querySelector("#feedbackMessage").value.trim();
+  return `Kategorie: ${category}\nBewertung: ${rating} von 5\nBereich: ${state.view}${state.lessonId?` · ${LESSONS[state.lessonId]?.title||state.lessonId}`:""}\n\n${message}`;
+}
+function openFeedback() {
+  const dialog=document.querySelector("#feedbackDialog"),message=document.querySelector("#feedbackMessage");
+  message.value=localStorage.getItem(FEEDBACK_DRAFT_KEY)||"";
+  document.querySelector("#feedbackCount").textContent=message.value.length;
+  document.querySelector("#feedbackStatus").textContent="";
+  dialog.showModal();
+}
+function validateFeedback() {
+  const message=document.querySelector("#feedbackMessage"),status=document.querySelector("#feedbackStatus");
+  if(message.value.trim().length<5){status.textContent="Bitte beschreibe dein Feedback mit mindestens fünf Zeichen.";message.focus();return false}
+  status.textContent="";return true;
+}
+async function copyFeedback() {
+  if(!validateFeedback())return;
+  const status=document.querySelector("#feedbackStatus");
+  try{await navigator.clipboard.writeText(feedbackText());status.textContent="Feedback wurde kopiert. Du kannst es jetzt überall einfügen."}
+  catch{status.textContent="Kopieren war nicht möglich. Markiere den Text bitte manuell."}
+}
+function submitFeedback(event) {
+  event.preventDefault();if(!validateFeedback())return;
+  const category=document.querySelector("#feedbackCategory").value;
+  const url=new URL("https://github.com/ibrahimmuhaisen90-tech/Arabisch-Schreiben/issues/new");
+  url.searchParams.set("title",`Feedback: ${category}`);url.searchParams.set("body",feedbackText());
+  localStorage.removeItem(FEEDBACK_DRAFT_KEY);
+  window.open(url.toString(),"_blank","noopener,noreferrer");
+  document.querySelector("#feedbackStatus").textContent="Die vorbereitete Rückmeldung wurde in GitHub geöffnet. Dort kannst du sie noch prüfen und absenden.";
+}
+
 const viewLabels = {
   home:["Start","Dein persönlicher Lernweg"], path:["Lernweg","Vom Alphabet bis zur Koranlektüre"],
   alphabet:["Alphabet","28 Buchstaben im Überblick"], practice:["Üben","Erkennen und festigen"], lesson:["Lektion","Schritt für Schritt lernen"]
@@ -365,6 +400,10 @@ function bindCommon(){document.querySelectorAll("[data-go]").forEach(button=>but
 document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
 document.querySelector("#installButton").addEventListener("click",()=>document.querySelector("#installDialog").showModal());
 document.querySelector("#sourceButton").addEventListener("click",()=>document.querySelector("#sourceDialog").showModal());
+document.querySelectorAll("[data-feedback-open]").forEach(button=>button.addEventListener("click",openFeedback));
+document.querySelector("#feedbackMessage").addEventListener("input",event=>{document.querySelector("#feedbackCount").textContent=event.target.value.length;localStorage.setItem(FEEDBACK_DRAFT_KEY,event.target.value)});
+document.querySelector("#copyFeedback").addEventListener("click",copyFeedback);
+document.querySelector("#feedbackForm").addEventListener("submit",submitFeedback);
 document.querySelectorAll("[data-close]").forEach(button=>button.addEventListener("click",()=>document.querySelector(`#${button.dataset.close}`).close()));
 document.querySelectorAll("dialog").forEach(dialog=>dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()}));
 document.querySelector("#streakValue").textContent=state.progress.streak;

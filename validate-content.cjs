@@ -21,7 +21,7 @@ if (Object.keys(LESSONS).length !== 31) errors.push(`Kurs: ${Object.keys(LESSONS
 
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const serviceWorker = fs.readFileSync("service-worker.js", "utf8");
-for (const asset of ["content.js", "curriculum.js", "app.js"]) {
+for (const asset of ["styles.css", "content.js", "curriculum.js", "app.js"]) {
   const versionedAsset = indexHtml.match(new RegExp(`${asset.replace(".", "\\.")}\\?v=\\d+`))?.[0];
   if (!versionedAsset || !serviceWorker.includes(versionedAsset)) {
     errors.push(`Offline-Cache: ${asset} stimmt nicht mit index.html überein.`);
