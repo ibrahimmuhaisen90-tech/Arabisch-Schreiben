@@ -29,6 +29,25 @@ const ALPHABET = [
   { id:"ya",letter:"ي",name:"Yā’",sound:"y / ī",forms:["ي","ـي","ـيـ","يـ"],joinsLeft:true,family:"Punktfamilie",note:"Kann Konsonant y oder Träger eines langen ī sein." }
 ];
 
+const WORD_PRACTICE = [
+  {word:"بَاب",plain:"باب",reading:"bāb",meaning:"Tür",letters:["ba","alif","ba"],choices:["bāb","bayt","nūr"]},
+  {word:"حَبّ",plain:"حب",reading:"ḥabb",meaning:"Korn · Samen",letters:["ha","ba"],choices:["ḥabb","khayr","qalam"]},
+  {word:"دَار",plain:"دار",reading:"dār",meaning:"Haus · Wohnstätte",letters:["dal","alif","ra"],choices:["dār","nās","fī"]},
+  {word:"خَبَر",plain:"خبر",reading:"khabar",meaning:"Nachricht",letters:["kha","ba","ra"],choices:["khabar","ṣabr","malik"]},
+  {word:"نُور",plain:"نور",reading:"nūr",meaning:"Licht",letters:["nun","waw","ra"],choices:["nūr","bāb","ʿilm"]},
+  {word:"قَلَم",plain:"قلم",reading:"qalam",meaning:"Stift",letters:["qaf","lam","mim"],choices:["qalam","qul","falāq"]},
+  {word:"كِتَاب",plain:"كتاب",reading:"kitāb",meaning:"Buch",letters:["kaf","ta","alif","ba"],choices:["kitāb","khabar","dār"]},
+  {word:"رَبّ",plain:"رب",reading:"rabb",meaning:"Herr · Erhalter",letters:["ra","ba"],choices:["rabb","bāb","min"]},
+  {word:"مَلِك",plain:"ملك",reading:"malik",meaning:"König",letters:["mim","lam","kaf"],choices:["malik","qalam","nās"]},
+  {word:"نَاس",plain:"ناس",reading:"nās",meaning:"Menschen",letters:["nun","alif","sin"],choices:["nās","nūr","dār"]},
+  {word:"قُلْ",plain:"قل",reading:"qul",meaning:"Sprich!",letters:["qaf","lam"],choices:["qul","fī","min"]},
+  {word:"مِنْ",plain:"من",reading:"min",meaning:"von · aus",letters:["mim","nun"],choices:["min","malik","ṣabr"]},
+  {word:"فِي",plain:"في",reading:"fī",meaning:"in",letters:["fa","ya"],choices:["fī","qul","nūr"]},
+  {word:"عِلْم",plain:"علم",reading:"ʿilm",meaning:"Wissen",letters:["ayn","lam","mim"],choices:["ʿilm","malik","qalam"]},
+  {word:"صَبْر",plain:"صبر",reading:"ṣabr",meaning:"Geduld",letters:["sad","ba","ra"],choices:["ṣabr","khabar","rabb"]},
+  {word:"فَلَق",plain:"فلق",reading:"falaq",meaning:"Morgendämmerung",letters:["fa","lam","qaf"],choices:["falaq","qalam","fī"]}
+];
+
 const COURSE_MODULES = [
   { id:"script",number:"01",title:"Schriftbasis",description:"Alle Buchstaben sicher erkennen und unterscheiden",tone:"green",lessons:[
     {id:"rtl-alif",title:"Leserichtung & Alif",meta:"8 Min. · Schreiben",available:true},

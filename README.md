@@ -23,6 +23,11 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - lokale Fortschritts- und Serienanzeige
 - adaptive Tagesrunde mit zehn Aufgaben und Wiederholungsabständen von 1 bis 60 Tagen
 - persönliche Schwächenliste und frühere Wiederholung nach Fehlern
+- dreistufiges Schreibtraining: Nachfahren, Abschreiben und Schreiben aus dem Gedächtnis
+- getrennte Rückmeldung zu Form, Startpunkt, Schreibrichtung, Größe und Punkten
+- Verlauf der letzten Schreibbewertungen pro Buchstabenform und Wort
+- Wortstudio zum Lesen, Zusammensetzen und Schreiben freigeschalteter Wörter
+- gemischte Lernkontrollen mit Auswahl, Ja/Nein-Entscheidung und freier Antwort
 - Offline-Unterstützung als Progressive Web App
 - responsive Oberfläche für iPad, Smartphone und Desktop
 - eigenes App-Logo und passende Home-Bildschirm-Symbole für iPad und PWA
@@ -66,3 +71,4 @@ Für eine reine Produktvorschau mit allen freigeschalteten Feldern kann `http://
 - `service-worker.js`: Offline-Cache
 - `manifest.webmanifest`: Installationsdaten der PWA
 - `ROADMAP.md`: fachliche und technische Ausbauplanung
+- `DIDAKTIK.md`: recherchierte Vorbilder, Lernprinzipien und Grenzen der Bewertung
