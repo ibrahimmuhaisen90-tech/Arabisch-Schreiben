@@ -26,7 +26,7 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - dreistufiges Schreibtraining: Nachfahren, Abschreiben und Schreiben aus dem Gedächtnis
 - getrennte Rückmeldung zu Form, Startpunkt, Schreibrichtung, Größe und Punkten
 - Verlauf der letzten Schreibbewertungen pro Buchstabenform und Wort
-- Wortstudio zum Lesen, Zusammensetzen und Schreiben freigeschalteter Wörter
+- Gestuftes Wortstudio mit über 30 Vokabeln zum Lesen, Verstehen, Zusammensetzen und Schreiben
 - gemischte Lernkontrollen mit eindeutiger Auswahl und freier Antwort
 - voraussetzungsbewusste Aufgaben: Jede Lektion prüft nur bereits erklärte oder gerade eingeführte Inhalte
 - automatische Qualitätskontrolle gegen dominante Antworten, zu lange Fragen und vorweggenommene Buchstabennamen

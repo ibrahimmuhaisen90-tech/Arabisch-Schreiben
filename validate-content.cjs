@@ -112,6 +112,7 @@ for (const item of scriptLessons) {
 }
 
 const letterIds = new Set(ALPHABET.map(letter => letter.id));
+const lessonIds = new Set(Object.keys(LESSONS));
 const taughtLetterIds = new Set(Object.values(LESSONS).flatMap(lesson => lesson.letters || []));
 for (const letter of ALPHABET) {
   if (!taughtLetterIds.has(letter.id)) errors.push(`${letter.name}: fehlt im Schriftkurs.`);
@@ -120,16 +121,29 @@ for (const letter of ALPHABET) {
     errors.push(`${letter.name}: keine Erkennungsaufgabe in seiner Schriftlektion.`);
   }
 }
+if (WORD_PRACTICE.length < 30) errors.push(`Wortstudio: nur ${WORD_PRACTICE.length} statt mindestens 30 Vokabeln.`);
+const seenWords = new Set();
 for (const word of WORD_PRACTICE) {
+  if (seenWords.has(word.plain)) errors.push(`${word.word}: doppelte Vokabel.`);
+  seenWords.add(word.plain);
   for (const letterId of word.letters) {
     if (!letterIds.has(letterId)) errors.push(`${word.word}: unbekannter Buchstabe ${letterId}.`);
   }
+  if (!Array.isArray(word.requires) || !word.requires.length) errors.push(`${word.word}: Lernvoraussetzung fehlt.`);
+  for (const requirement of word.requires || []) {
+    if (!lessonIds.has(requirement)) errors.push(`${word.word}: unbekannte Lernvoraussetzung ${requirement}.`);
+  }
+  if (word.buildLetters && word.buildLetters.length !== word.letters.length) errors.push(`${word.word}: Bauformen passen nicht zur Buchstabenanzahl.`);
+  if (new Set(word.choices).size !== 3) errors.push(`${word.word}: benötigt genau drei unterschiedliche Leseoptionen.`);
   if (!word.choices.includes(word.reading)) errors.push(`${word.word}: richtige Lesung fehlt in der Auswahl.`);
+}
+if (!appSource.includes("word.requires") || !appSource.includes("data-word-meaning")) {
+  errors.push("Wortstudio: gestufte Freischaltung oder Bedeutungsübung fehlt.");
 }
 
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log(`Inhaltsprüfung bestanden: ${Object.keys(LESSONS).length} Lektionen, 10 eindeutige Aufgaben je Lektion, ${ALPHABET.length} Buchstaben.`);
+  console.log(`Inhaltsprüfung bestanden: ${Object.keys(LESSONS).length} Lektionen, 10 eindeutige Aufgaben je Lektion, ${ALPHABET.length} Buchstaben und ${WORD_PRACTICE.length} gestufte Vokabeln.`);
 }
