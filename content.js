@@ -35,7 +35,7 @@ const WORD_PRACTICE = [
   {word:"دَار",plain:"دار",reading:"dār",meaning:"Haus · Wohnstätte",letters:["dal","alif","ra"],choices:["dār","nās","fī"]},
   {word:"خَبَر",plain:"خبر",reading:"khabar",meaning:"Nachricht",letters:["kha","ba","ra"],choices:["khabar","ṣabr","malik"]},
   {word:"نُور",plain:"نور",reading:"nūr",meaning:"Licht",letters:["nun","waw","ra"],choices:["nūr","bāb","ʿilm"]},
-  {word:"قَلَم",plain:"قلم",reading:"qalam",meaning:"Stift",letters:["qaf","lam","mim"],choices:["qalam","qul","falāq"]},
+  {word:"قَلَم",plain:"قلم",reading:"qalam",meaning:"Stift",letters:["qaf","lam","mim"],choices:["qalam","qul","falaq"]},
   {word:"كِتَاب",plain:"كتاب",reading:"kitāb",meaning:"Buch",letters:["kaf","ta","alif","ba"],choices:["kitāb","khabar","dār"]},
   {word:"رَبّ",plain:"رب",reading:"rabb",meaning:"Herr · Erhalter",letters:["ra","ba"],choices:["rabb","bāb","min"]},
   {word:"مَلِك",plain:"ملك",reading:"malik",meaning:"König",letters:["mim","lam","kaf"],choices:["malik","qalam","nās"]},

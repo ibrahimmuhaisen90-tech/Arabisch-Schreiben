@@ -23,7 +23,7 @@ Erwachsene ohne Vorkenntnisse sollen arabische Buchstaben sicher erkennen, in ih
 4. **Konkrete Rückmeldung:** Die App bewertet Startpunkt, Bewegungsrichtung, Grundform, Größe und Punkte getrennt und nennt den nächsten Verbesserungsschritt.
 5. **Positionsformen:** Allein-, Anfangs-, Mittel- und Endform werden ausdrücklich geübt.
 6. **Früher Worttransfer:** Bekannte Buchstaben werden zu vokalisierten Wörtern verbunden. Lernende lesen, setzen zusammen und schreiben.
-7. **Aktiver Abruf:** Neben Auswahlfragen gibt es Ja/Nein-Entscheidungen und Antworten ohne vorgegebene Auswahl.
+7. **Aktiver Abruf:** Neben eindeutigen Auswahlfragen gibt es regelmäßig Antworten ohne vorgegebene Auswahl. Künstlich erzeugte Ja/Nein-Zuordnungen werden vermieden, weil sie Buchstabe, Wort und Aussage leicht missverständlich vermischen.
 8. **Verteilte Wiederholung:** Fehler werden früher, sichere Inhalte in wachsenden Abständen wiederholt.
 
 ## Grenzen der automatischen Schreibprüfung

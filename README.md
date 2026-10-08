@@ -27,7 +27,7 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - getrennte Rückmeldung zu Form, Startpunkt, Schreibrichtung, Größe und Punkten
 - Verlauf der letzten Schreibbewertungen pro Buchstabenform und Wort
 - Wortstudio zum Lesen, Zusammensetzen und Schreiben freigeschalteter Wörter
-- gemischte Lernkontrollen mit Auswahl, Ja/Nein-Entscheidung und freier Antwort
+- gemischte Lernkontrollen mit eindeutiger Auswahl und freier Antwort
 - Offline-Unterstützung als Progressive Web App
 - responsive Oberfläche für iPad, Smartphone und Desktop
 - eigenes App-Logo und passende Home-Bildschirm-Symbole für iPad und PWA
@@ -52,6 +52,8 @@ python -m http.server 4173
 Danach `http://localhost:4173` im Browser öffnen.
 
 Für eine reine Produktvorschau mit allen freigeschalteten Feldern kann `http://localhost:4173/?preview=all` geöffnet werden. Unfertige Lektionen sind dort deutlich als Vorschau markiert und verändern den normalen Lernfortschritt nicht.
+
+Vor jeder Veröffentlichung prüft `node validate-content.cjs` alle Lektionen auf zehn eindeutige Aufgaben, vorhandene Lösungen, doppelte Optionen, unerwünschte Fragetypen und vollständige Schreibübungen.
 
 ## GitHub Pages
 

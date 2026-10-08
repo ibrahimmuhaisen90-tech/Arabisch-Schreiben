@@ -64,10 +64,10 @@ LESSONS["rtl-alif"].questions = [
   {glyph:"ا",prompt:"Verbindet sich Alif mit dem folgenden Buchstaben links?",options:["Nein","Ja, immer","Nur am Wortanfang"],answer:"Nein"},
   {glyph:"ـا",prompt:"Welche Form siehst du?",options:["Alif am Wortende","Lām am Wortanfang","Dāl allein"],answer:"Alif am Wortende"},
   {glyph:"العربية",prompt:"Wo beginnst du dieses arabische Wort zu lesen?",options:["Am rechten Rand","Am linken Rand","In der Mitte"],answer:"Am rechten Rand"},
-  {glyph:"ا",prompt:"Wie führst du den Strich beim Schreiben?",options:["Ruhig von oben nach unten","Von unten nach oben","Als geschlossenen Kreis"],answer:"Ruhig von oben nach unten"},
-  {glyph:"ا",prompt:"Welche Aussage über Alif stimmt?",options:["Es ist hoch und aufrecht","Es hat drei Punkte","Es besitzt eine Schalenform"],answer:"Es ist hoch und aufrecht"},
-  {glyph:"ا ب",prompt:"Welcher Buchstabe steht rechts?",options:["Alif","Bā’","Beide stehen links"],answer:"Alif"},
-  {glyph:"ب ا",prompt:"Welcher Buchstabe steht links?",options:["Alif","Bā’","Keiner"],answer:"Alif"}
+  {glyph:"ا",prompt:"Wie viele Punkte hat Alif?",options:["Keine","Einen darunter","Zwei darüber"],answer:"Keine"},
+  {glyph:"بَا",prompt:"Welcher Buchstabe verlängert hier den a-Laut?",options:["Alif","Bā’","Keiner"],answer:"Alif"},
+  {glyph:"ـا",prompt:"Auf welcher Seite ist Alif hier verbunden?",options:["Auf der rechten Seite","Auf der linken Seite","Auf beiden Seiten"],answer:"Auf der rechten Seite"},
+  {glyph:"ا",prompt:"Welche Form gehört zu Alif?",options:["ا","ب","ل"],answer:"ا"}
 ];
 if (!LESSONS["rtl-alif"].slides.some(slide => slide.type === "quiz")) {
   LESSONS["rtl-alif"].slides.push({type:"quiz",title:"Grundlagen festigen",body:"Prüfe Leserichtung und Alif in wechselnder Reihenfolge."});
@@ -77,7 +77,9 @@ function questionOptions(answer, alternatives, fallbacks) {
   return [...new Set([answer, ...alternatives, ...fallbacks])].slice(0, 3);
 }
 
-Object.values(LESSONS).forEach(lesson => {
+const lessonPool = Object.values(LESSONS);
+
+lessonPool.forEach(lesson => {
   lesson.questions ||= [];
   const addQuestion = question => {
     const key = `${question.glyph}|${question.prompt}|${question.answer}`;
@@ -130,13 +132,14 @@ Object.values(LESSONS).forEach(lesson => {
   });
 
   const points = lesson.slides.find(slide => slide.type === "concept")?.points || [];
-  points.forEach(point => {
+  const otherLessonTitles = lessonPool.filter(item => item !== lesson).map(item => item.title);
+  points.forEach((point, pointIndex) => {
     if (lesson.questions.length >= 10) return;
     addQuestion({
-      glyph:"✓",
-      prompt:"Welche Aussage gehört zu dieser Lektion?",
-      options:questionOptions(point, points.filter(item => item !== point), ["Keine dieser Aussagen","Andere Regel"]),
-      answer:point
+      glyph:point,
+      prompt:"Zu welcher Lektion gehört dieser Merksatz?",
+      options:questionOptions(lesson.title, [otherLessonTitles[pointIndex % otherLessonTitles.length], otherLessonTitles[(pointIndex + 7) % otherLessonTitles.length]], ["Andere Lektion"]),
+      answer:lesson.title
     });
   });
 
