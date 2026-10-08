@@ -22,6 +22,7 @@ if (Object.keys(LESSONS).length !== 31) errors.push(`Kurs: ${Object.keys(LESSONS
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const serviceWorker = fs.readFileSync("service-worker.js", "utf8");
 const appSource = fs.readFileSync("app.js", "utf8");
+const stylesSource = fs.readFileSync("styles.css", "utf8");
 for (const asset of ["styles.css", "content.js", "curriculum.js", "app.js"]) {
   const versionedAsset = indexHtml.match(new RegExp(`${asset.replace(".", "\\.")}\\?v=\\d+`))?.[0];
   if (!versionedAsset || !serviceWorker.includes(versionedAsset)) {
@@ -36,6 +37,9 @@ if (!serviceWorker.includes("client.navigate(client.url)") || !appSource.include
 }
 if (appSource.includes("window.open(url.toString()") || !appSource.includes("window.location.assign(url.toString())")) {
   errors.push("Feedback: GitHub-Weiterleitung kann im App-Modus blockiert werden.");
+}
+for (const requiredMobileRule of ["@media(max-width:480px)","env(safe-area-inset-bottom)","100dvh","orientation:landscape","font-size:16px"]) {
+  if (!stylesSource.includes(requiredMobileRule)) errors.push(`iPhone-Layout: Regel ${requiredMobileRule} fehlt.`);
 }
 
 for (const [lessonId, lesson] of Object.entries(LESSONS)) {
