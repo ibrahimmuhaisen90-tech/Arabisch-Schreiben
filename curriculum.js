@@ -20,14 +20,14 @@ function courseLesson({title,module,focus,body,points=[],examples=[],questions=[
 }
 
 Object.assign(LESSONS,{
-  curves:courseLesson({title:"Dāl bis Zāy",module:"Schriftbasis",focus:"Vier gebogene Nicht-Verbinder",body:"Dāl, Dhāl, Rā’ und Zāy verbinden sich mit dem Buchstaben rechts, aber nicht mit einem folgenden Buchstaben links.",letters:["dal","dhal","ra","zay"],points:["Dāl und Dhāl teilen eine Form.","Rā’ und Zāy teilen eine zweite Form.","Der Punkt unterscheidet jeweils das Paar."],examples:[{arabic:"د ذ",label:"Dāl · Dhāl",note:"Dhāl trägt einen Punkt."},{arabic:"ر ز",label:"Rā’ · Zāy",note:"Zāy trägt einen Punkt."}],questions:[{glyph:"ذ",prompt:"Welcher Buchstabe ist das?",options:["Dāl","Dhāl","Zāy"],answer:"Dhāl"},{glyph:"ز",prompt:"Welcher Buchstabe trägt hier den Punkt?",options:["Rā’","Zāy","Dāl"],answer:"Zāy"}]}),
+  curves:courseLesson({title:"Dāl bis Zāy",module:"Schriftbasis",focus:"Vier gebogene Nicht-Verbinder",body:"Dāl, Dhāl, Rā’ und Zāy können eine Verbindung aufnehmen. Nach ihnen beginnt der nächste Buchstabe jedoch getrennt.",letters:["dal","dhal","ra","zay"],points:["Dāl und Dhāl teilen eine Form.","Rā’ und Zāy teilen eine zweite Form.","Der Punkt unterscheidet jeweils das Paar."],examples:[{arabic:"د ذ",label:"Dāl · Dhāl",note:"Dhāl trägt einen Punkt."},{arabic:"ر ز",label:"Rā’ · Zāy",note:"Zāy trägt einen Punkt."}],questions:[{glyph:"ذ",prompt:"Welcher Buchstabe ist das?",options:["Dāl","Dhāl","Zāy"],answer:"Dhāl"},{glyph:"ز",prompt:"Welcher Buchstabe trägt hier den Punkt?",options:["Rā’","Zāy","Dāl"],answer:"Zāy"}]}),
   teeth:courseLesson({title:"Sīn bis Ḍād",module:"Schriftbasis",focus:"Zähne und breite Formen",body:"Sīn und Shīn besitzen eine Zahnform. Ṣād und Ḍād haben eine breitere, geschlossene Grundform und einen kräftigeren Laut.",letters:["sin","shin","sad","dad"],points:["Shīn hat drei Punkte über Sīn.","Ḍād hat einen Punkt über Ṣād.","Ṣād und Ḍād werden emphatisch gesprochen."],examples:[{arabic:"س ش",label:"Sīn · Shīn",note:"Drei Punkte machen aus Sīn ein Shīn."},{arabic:"ص ض",label:"Ṣād · Ḍād",note:"Ein Punkt unterscheidet das Paar."}],questions:[{glyph:"ش",prompt:"Welche Form hat drei Punkte?",options:["Sīn","Shīn","Ṣād"],answer:"Shīn"},{glyph:"ض",prompt:"Welcher Buchstabe ist das?",options:["Ḍād","Ṣād","Shīn"],answer:"Ḍād"}]}),
   throat:courseLesson({title:"Ṭā’ bis Ghayn",module:"Schriftbasis",focus:"Kräftige und tiefe Laute",body:"Ṭā’ und Ẓā’ sind emphatische Laute. ʿAyn und Ghayn entstehen im Rachen und benötigen später besonders sorgfältiges Hörtraining.",letters:["tta","zza","ayn","ghayn"],points:["Ẓā’ trägt einen Punkt über Ṭā’.","Ghayn trägt einen Punkt über ʿAyn.","Form zuerst erkennen; Aussprache mit geprüftem Audio festigen."],examples:[{arabic:"ط ظ",label:"Ṭā’ · Ẓā’",note:"Der Punkt unterscheidet das Paar."},{arabic:"ع غ",label:"ʿAyn · Ghayn",note:"Ghayn trägt einen Punkt."}],questions:[{glyph:"غ",prompt:"Welcher Rachenbuchstabe trägt einen Punkt?",options:["ʿAyn","Ghayn","Ẓā’"],answer:"Ghayn"},{glyph:"ط",prompt:"Welcher Buchstabe ist das?",options:["Ṭā’","Ẓā’","Ḍād"],answer:"Ṭā’"}]}),
-  heads:courseLesson({title:"Fā’ bis Lām",module:"Schriftbasis",focus:"Vier eigenständige Formen",body:"Fā’, Qāf, Kāf und Lām bilden eine abwechslungsreiche Gruppe. Punkte, Höhe und Innenform helfen bei der Unterscheidung.",letters:["fa","qaf","kaf","lam"],points:["Fā’ hat einen Punkt, Qāf zwei.","Kāf verändert seine Innenform je nach Position.","Lām ist hoch und verbindet sich nach links."],examples:[{arabic:"ف ق",label:"Fā’ · Qāf",note:"Ein oder zwei Punkte."},{arabic:"ك ل",label:"Kāf · Lām",note:"Innenzeichen oder hoher Strich."}],questions:[{glyph:"ق",prompt:"Welche Form trägt zwei Punkte?",options:["Fā’","Qāf","Kāf"],answer:"Qāf"},{glyph:"ل",prompt:"Welcher Buchstabe ist das?",options:["Lām","Kāf","Alif"],answer:"Lām"}]}),
-  finals:courseLesson({title:"Mīm bis Yā’",module:"Schriftbasis",focus:"Die letzten fünf Buchstaben",body:"Mīm, Nūn, Hā’, Wāw und Yā’ schließen das Grundalphabet ab. Wāw verbindet sich nicht mit dem folgenden Buchstaben links.",letters:["mim","nun","ha2","waw","ya"],points:["Nūn hat einen Punkt oben.","Yā’ hat in der isolierten Form zwei Punkte unten.","Wāw kann Konsonant oder langer Vokal sein."],examples:[{arabic:"م ن ه",label:"Mīm · Nūn · Hā’",note:"Rundform, Punktform und Hauchlaut."},{arabic:"و ي",label:"Wāw · Yā’",note:"Auch Träger langer Vokale."}],questions:[{glyph:"ن",prompt:"Welcher Buchstabe hat einen Punkt oben?",options:["Mīm","Nūn","Hā’"],answer:"Nūn"},{glyph:"ي",prompt:"Welcher Buchstabe ist das?",options:["Wāw","Yā’","Nūn"],answer:"Yā’"}]}),
+  heads:courseLesson({title:"Fā’ bis Lām",module:"Schriftbasis",focus:"Vier eigenständige Formen",body:"Fā’, Qāf, Kāf und Lām bilden eine abwechslungsreiche Gruppe. Punkte, Höhe und Innenform helfen bei der Unterscheidung.",letters:["fa","qaf","kaf","lam"],points:["Fā’ hat einen Punkt, Qāf zwei.","Kāf verändert seine Innenform je nach Position.","Lām verbindet sich mit dem nächsten Buchstaben."],examples:[{arabic:"ف ق",label:"Fā’ · Qāf",note:"Ein oder zwei Punkte."},{arabic:"ك ل",label:"Kāf · Lām",note:"Innenzeichen oder hoher Strich."}],questions:[{glyph:"ق",prompt:"Welche Form trägt zwei Punkte?",options:["Fā’","Qāf","Kāf"],answer:"Qāf"},{glyph:"ل",prompt:"Welcher Buchstabe ist das?",options:["Lām","Kāf","Alif"],answer:"Lām"}]}),
+  finals:courseLesson({title:"Mīm bis Yā’",module:"Schriftbasis",focus:"Die letzten fünf Buchstaben",body:"Mīm, Nūn, Hā’, Wāw und Yā’ schließen das Grundalphabet ab. Nach Wāw beginnt der nächste Buchstabe getrennt.",letters:["mim","nun","ha2","waw","ya"],points:["Nūn hat einen Punkt oben.","Yā’ hat in der isolierten Form zwei Punkte unten.","Wāw kann Konsonant oder langer Vokal sein."],examples:[{arabic:"م ن ه",label:"Mīm · Nūn · Hā’",note:"Rundform, Punktform und Hauchlaut."},{arabic:"و ي",label:"Wāw · Yā’",note:"Auch Träger langer Vokale."}],questions:[{glyph:"ن",prompt:"Welcher Buchstabe hat einen Punkt oben?",options:["Mīm","Nūn","Hā’"],answer:"Nūn"},{glyph:"ي",prompt:"Welcher Buchstabe ist das?",options:["Wāw","Yā’","Nūn"],answer:"Yā’"}]}),
 
   "connect-forms":courseLesson({title:"Formen im Wort",module:"Buchstaben verbinden",focus:"Ein Buchstabe – mehrere Formen",body:"Verbindende Buchstaben können allein, am Anfang, in der Mitte oder am Ende eines Wortes stehen. Der Grundkörper bleibt erkennbar.",points:["Beginne beim Lesen rechts.","Suche Punkte und charakteristische Bögen.","Vergleiche Anfangs- und Endform."],examples:[{arabic:"ب  بـ  ـبـ  ـب",label:"Bā’ in vier Positionen",note:"Allein · Anfang · Mitte · Ende"},{arabic:"م  مـ  ـمـ  ـم",label:"Mīm in vier Positionen",note:"Der runde Kern bleibt erhalten."}],questions:[{glyph:"ـبـ",prompt:"Welche Position zeigt diese Form?",options:["Am Anfang","In der Mitte","Allein"],answer:"In der Mitte"},{glyph:"مـ",prompt:"Wo steht diese Mīm-Form?",options:["Am Anfang","Am Ende","Allein"],answer:"Am Anfang"}]}),
-  nonjoiners:courseLesson({title:"Nicht-Verbinder",module:"Buchstaben verbinden",focus:"Sechs Buchstaben unterbrechen die Linie",body:"Alif, Dāl, Dhāl, Rā’, Zāy und Wāw verbinden sich nicht mit einem folgenden Buchstaben links.",points:["Merke dir: ا د ذ ر ز و","Die Verbindung von rechts kann trotzdem bestehen.","Nach ihnen beginnt optisch ein neuer Abschnitt."],examples:[{arabic:"ا د ذ",label:"Alif · Dāl · Dhāl",note:"Kein Anschluss nach links."},{arabic:"ر ز و",label:"Rā’ · Zāy · Wāw",note:"Ebenfalls Nicht-Verbinder."}],questions:[{glyph:"ا د ذ ر ز و",prompt:"Was haben diese Buchstaben gemeinsam?",options:["Sie verbinden nicht nach links","Sie haben alle Punkte","Sie sind Vokale"],answer:"Sie verbinden nicht nach links"},{glyph:"و",prompt:"Verbindet sich Wāw mit dem folgenden Buchstaben links?",options:["Nein","Ja","Nur am Wortanfang"],answer:"Nein"}]}),
+  nonjoiners:courseLesson({title:"Nicht-Verbinder",module:"Buchstaben verbinden",focus:"Sechs Buchstaben unterbrechen die Linie",body:"Alif, Dāl, Dhāl, Rā’, Zāy und Wāw beenden die Verbindung. Nach ihnen beginnt der nächste Buchstabe getrennt.",points:["Merke dir: ا د ذ ر ز و","Sie können eine Verbindung aufnehmen.","Danach beginnt ein neuer Abschnitt."],examples:[{arabic:"ا د ذ",label:"Alif · Dāl · Dhāl",note:"Danach beginnt der nächste Buchstabe getrennt."},{arabic:"ر ز و",label:"Rā’ · Zāy · Wāw",note:"Auch sie beenden die Verbindung."}],questions:[{glyph:"ا د ذ ر ز و",prompt:"Was passiert nach diesen Buchstaben?",options:["Der nächste Buchstabe beginnt getrennt","Die Linie läuft immer weiter","Der nächste Buchstabe erhält einen Punkt"],answer:"Der nächste Buchstabe beginnt getrennt"},{glyph:"و",prompt:"Gehört Wāw zu den Nicht-Verbindern?",options:["Ja","Nein","Nur am Wortanfang"],answer:"Ja"}]}),
   "word-parts":courseLesson({title:"Wörter zerlegen",module:"Buchstaben verbinden",focus:"Verbundene Formen zurückverfolgen",body:"Beim Lesen zerlegst du das Wort gedanklich in seine Grundbuchstaben. Punkte und Unterbrechungen zeigen dir die Grenzen.",points:["Rechts beginnen.","Jeden Grundkörper bestimmen.","Nicht-Verbinder als sichtbare Trennung nutzen."],examples:[{arabic:"كَتَبَ",label:"Kāf · Tā’ · Bā’",note:"Drei verbundene Buchstaben."},{arabic:"نُور",label:"Nūn · Wāw · Rā’",note:"Wāw unterbricht die Verbindung."}],questions:[{glyph:"كَتَبَ",prompt:"Welcher Buchstabe steht in der Mitte?",options:["Tā’","Kāf","Bā’"],answer:"Tā’"},{glyph:"نُور",prompt:"Welcher Buchstabe unterbricht hier die Verbindung?",options:["Wāw","Nūn","Rā’"],answer:"Wāw"}]}),
   "connected-reading":courseLesson({title:"Verbindungen lesen",module:"Buchstaben verbinden",focus:"Erste vollständige Wortbilder",body:"Lies nicht Buchstabe für Buchstabe isoliert, sondern erkenne zunehmend ganze Formgruppen.",points:["Erst langsam zerlegen.","Dann erneut als Einheit lesen.","Punkte immer kontrollieren."],examples:[{arabic:"بَاب",label:"bāb",note:"Tür"},{arabic:"كِتَاب",label:"kitāb",note:"Buch"},{arabic:"نُور",label:"nūr",note:"Licht"}],questions:[{glyph:"كِتَاب",prompt:"Welche Umschrift passt?",options:["kitāb","bāb","nūr"],answer:"kitāb"},{glyph:"نُور",prompt:"Welches Wort liest du?",options:["nūr","kitāb","bāb"],answer:"nūr"}]}),
 
@@ -64,8 +64,7 @@ function q(glyph,prompt,options,answer,exercise="Anwenden") {
 
 function letterChoices(letters,current,key) {
   const values=letters.map(letter=>letter[key]);
-  const globalValues=ALPHABET.map(letter=>letter[key]);
-  return [...new Set([current[key],...values,...globalValues])].slice(0,3);
+  return [...new Set([current[key],...values])].slice(0,3);
 }
 
 function letterLessonQuestions(letterIds) {
@@ -78,23 +77,26 @@ function letterLessonQuestions(letterIds) {
     questions.push(q(letter.forms[formIndex],`Welcher Buchstabe steht hier ${positions[formIndex]}?`,letterChoices(letters,letter,"name"),letter.name,"Form im Wort"));
   });
   letters.forEach(letter=>questions.push(q(letter.letter,"Welcher Laut gehört zu diesem Buchstaben?",letterChoices(letters,letter,"sound"),letter.sound,"Laut zuordnen")));
-  letters.forEach(letter=>questions.push(q(letter.letter,"Kann dieser Buchstabe mit dem folgenden Buchstaben links verbunden werden?",letter.joinsLeft?["Ja","Nein","Nur mit Vokalzeichen"]:["Nein","Ja","Nur am Wortende"],letter.joinsLeft?"Ja":"Nein","Verbinden")));
+  if(questions.length<10&&letters.length>=3){
+    const target=letters[0];
+    questions.push(q(letters.map(letter=>letter.letter).join("  "),`Welche Form gehört zu ${target.name}?`,letters.slice(0,3).map(letter=>letter.letter),target.letter,"Unterscheiden"));
+  }
   return questions.slice(0,10);
 }
 
 LESSONS["rtl-alif"].questions = [
   q("←","In welche Richtung liest du eine arabische Zeile?",["Von rechts nach links","Von links nach rechts","Von unten nach oben"],"Von rechts nach links","Leserichtung"),
-  q("ا","Welcher Buchstabe ist das?",["Alif","Lām","Dāl"],"Alif","Erkennen"),
-  q("ـا","Welcher Buchstabe steht hier am Wortende?",["Alif","Lām","Rā’"],"Alif","Form im Wort"),
-  q("بَا","Welcher Buchstabe verlängert hier den a-Laut?",["Alif","Bā’","Keiner"],"Alif","Lesen"),
-  q("بَاب","Wie oft kommt Alif in diesem Wort vor?",["Einmal","Zweimal","Gar nicht"],"Einmal","Im Wort finden"),
-  q("دَار","Welcher Buchstabe steht zwischen Dāl und Rā’?",["Alif","Lām","Wāw"],"Alif","Wort zerlegen"),
-  q("ا","Verbindet sich Alif mit dem folgenden Buchstaben links?",["Nein","Ja","Nur mit Kasra"],"Nein","Verbinden"),
-  q("با","Wo wird die Verbindung durch Alif beendet?",["Nach Alif","Vor Bā’","Nirgends"],"Nach Alif","Verbinden"),
-  q("ا ل د","Wähle Alif aus.",["ا","ل","د"],"ا","Unterscheiden"),
-  q("العربية","Wo beginnst du dieses Wort zu lesen?",["Am rechten Rand","Am linken Rand","In der Mitte"],"Am rechten Rand","Leserichtung")
+  q("←","An welcher Seite startest du?",["Am rechten Rand","Am linken Rand","In der Mitte"],"Am rechten Rand","Leserichtung"),
+  q("→  ←","Welcher Pfeil zeigt die arabische Leserichtung?",["←","→","Beide"],"←","Leserichtung"),
+  q("ا","Tippe auf dieselbe Form.",["ا","د","و"],"ا","Form erkennen"),
+  q("Alif","Welche Form gehört zu Alif?",["ا","ل","ر"],"ا","Form erkennen"),
+  q("ا  ا","Sind beide Zeichen gleich?",["Ja","Nein","Nur beim Schreiben"],"Ja","Vergleichen"),
+  q("ا  ـا","Zeigen beide Formen Alif?",["Ja","Nein","Nur die linke Form"],"Ja","Formen zuordnen"),
+  q("ا  د  و","Wo steht Alif?",["Ganz rechts","In der Mitte","Ganz links"],"Ganz rechts","Form finden"),
+  q("ـا","Welche Form zeigt Alif allein?",["ا","د","و"],"ا","Formen zuordnen"),
+  q("ا  د  و","An welcher Seite beginnst du die Reihe?",["Am rechten Rand","Am linken Rand","In der Mitte"],"Am rechten Rand","Leserichtung")
 ];
-if (!LESSONS["rtl-alif"].slides.some(slide => slide.type === "quiz")) LESSONS["rtl-alif"].slides.push({type:"quiz",title:"Erkennen und anwenden",body:"Lies von rechts und erkenne Alif allein und im Wort."});
+if (!LESSONS["rtl-alif"].slides.some(slide => slide.type === "quiz")) LESSONS["rtl-alif"].slides.push({type:"quiz",title:"Erkennen und anwenden",body:"Finde Alif und sichere die Leserichtung."});
 
 ["dots","bowls","curves","teeth","throat","heads","finals"].forEach(id=>{
   LESSONS[id].questions=letterLessonQuestions(LESSONS[id].letters);
@@ -116,15 +118,15 @@ Object.assign(TARGETED_QUESTION_BANK,{
     q("عِلْم","Welcher Buchstabe steht am Wortende links?",["Mīm","ʿAyn","Lām"],"Mīm","Im Wort finden")
   ],
   nonjoiners:[
-    q("ا د ذ ر ز و","Welche Eigenschaft haben diese sechs Buchstaben?",["Sie verbinden nicht nach links","Sie tragen alle Punkte","Sie sind lange Vokale"],"Sie verbinden nicht nach links","Regel anwenden"),
-    q("و","Verbindet sich Wāw mit dem folgenden Buchstaben links?",["Nein","Ja","Nur mit Fatḥa"],"Nein","Verbinden"),
-    q("د","Verbindet sich Dāl mit dem folgenden Buchstaben links?",["Nein","Ja","Nur am Wortanfang"],"Nein","Verbinden"),
+    q("ا د ذ ر ز و","Was passiert nach diesen Buchstaben?",["Der nächste Buchstabe beginnt getrennt","Die Linie läuft immer weiter","Der nächste Buchstabe wird verdoppelt"],"Der nächste Buchstabe beginnt getrennt","Regel anwenden"),
+    q("و","Gehört Wāw zu den Nicht-Verbindern?",["Ja","Nein","Nur mit Fatḥa"],"Ja","Erkennen"),
+    q("د  ا  ب","Tippe auf Dāl.",["د","ا","ب"],"د","Erkennen"),
     q("ب","Gehört Bā’ zu den sechs Nicht-Verbindern?",["Nein","Ja","Nur ohne Punkte"],"Nein","Unterscheiden"),
     q("نُور","Welcher Buchstabe unterbricht nach sich die Verbindung?",["Wāw","Nūn","Rā’"],"Wāw","Im Wort finden"),
     q("دَار","Welcher Buchstabe unterbricht die Verbindung zuerst?",["Dāl","Alif","Rā’"],"Dāl","Im Wort finden"),
-    q("زَاد","Welcher Buchstabe steht rechts und verbindet nicht nach links?",["Zāy","Alif","Dāl"],"Zāy","Im Wort finden"),
-    q("را","Warum bleiben Rā’ und Alif optisch getrennt?",["Rā’ verbindet nicht nach links","Alif hat keinen Punkt","Beide sind Vokale"],"Rā’ verbindet nicht nach links","Regel anwenden"),
-    q("بـ","Welche Form zeigt einen Buchstaben, der nach links verbindet?",["بـ","د","و"],"بـ","Unterscheiden"),
+    q("زَاد","Welcher Buchstabe beendet die erste Verbindung?",["Zāy","Alif","Dāl"],"Zāy","Im Wort finden"),
+    q("را","Warum beginnt Alif hier getrennt?",["Rā’ beendet die Verbindung","Alif hat keinen Punkt","Beide sind Vokale"],"Rā’ beendet die Verbindung","Regel anwenden"),
+    q("بـ","Welche Form verbindet sich mit dem nächsten Buchstaben?",["بـ","د","و"],"بـ","Unterscheiden"),
     q("ا د ذ ر ز و","Wie viele Nicht-Verbinder musst du sicher erkennen?",["Sechs","Vier","Acht"],"Sechs","Festigen")
   ],
   "word-parts":[
@@ -292,8 +294,8 @@ Object.assign(TARGETED_QUESTION_BANK,{
   "ta-marbuta":[
     q("ة","Wie heißt diese Endform?",["Tā’ marbūṭa","Hā’","Alif maqṣūra"],"Tā’ marbūṭa","Zeichen erkennen"),
     q("ـة","Wo kann diese Form stehen?",["Am Wortende","Am Wortanfang","In der Wortmitte"],"Am Wortende","Position erkennen"),
-    q("رَحْمَةٌ","Welcher Buchstabe steht am Wortende?",["Tā’ marbūṭa","Hā’","Tā’ offen"],"Tā’ marbūṭa","Im Wort finden"),
-    q("سُورَةٌ","Welcher Buchstabe steht am Wortende?",["Tā’ marbūṭa","Hā’","Alif maqṣūra"],"Tā’ marbūṭa","Im Wort finden"),
+    q("رَحْمَةٌ","Welche Endform siehst du?",["ة","ه","ت"],"ة","Im Wort finden"),
+    q("سُورَةٌ","Welche Form beendet das Wort?",["ة","ه","ى"],"ة","Im Wort finden"),
     q("رَحْمَةٌ","Welcher Laut wird beim verbundenen Lesen der Endung hörbar?",["t","h","y"],"t","Verbunden lesen"),
     q("رَحْمَةْ","Wie klingt Tā’ marbūṭa beim Anhalten gewöhnlich?",["wie h","wie t mit Fatḥa","wie langes ā"],"wie h","Beim وقف lesen"),
     q("ة / ه","Welche Form ist Tā’ marbūṭa?",["ة","ه","Beide"],"ة","Unterscheiden"),

@@ -28,6 +28,8 @@ Eine installierbare Lern-App für Erwachsene, die ohne Vorkenntnisse mit der ara
 - Verlauf der letzten Schreibbewertungen pro Buchstabenform und Wort
 - Wortstudio zum Lesen, Zusammensetzen und Schreiben freigeschalteter Wörter
 - gemischte Lernkontrollen mit eindeutiger Auswahl und freier Antwort
+- voraussetzungsbewusste Aufgaben: Jede Lektion prüft nur bereits erklärte oder gerade eingeführte Inhalte
+- automatische Qualitätskontrolle gegen dominante Antworten, zu lange Fragen und vorweggenommene Buchstabennamen
 - Offline-Unterstützung als Progressive Web App
 - responsive Oberfläche für iPad, Smartphone und Desktop
 - eigene iPhone-Optimierung für kleine Displays, Hoch- und Querformat, Notch, Home-Leiste, Bildschirmtastatur und große Touchflächen

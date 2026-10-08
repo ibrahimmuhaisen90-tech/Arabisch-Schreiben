@@ -1,14 +1,14 @@
 const ALPHABET = [
-  { id:"alif",letter:"ا",name:"Alif",sound:"langes ā / Träger für Hamza",forms:["ا","ـا","—","—"],joinsLeft:false,family:"Grundform",note:"Alif kann ein langes ā tragen und dient als Träger für Hamza. Es verbindet sich nicht mit dem folgenden Buchstaben links." },
+  { id:"alif",letter:"ا",name:"Alif",sound:"langes ā / Träger für Hamza",forms:["ا","ـا","—","—"],joinsLeft:false,family:"Grundform",note:"Alif kann ein langes ā tragen und dient als Träger für Hamza. Nach Alif beginnt der nächste Buchstabe getrennt." },
   { id:"ba",letter:"ب",name:"Bā’",sound:"b",forms:["ب","ـب","ـبـ","بـ"],joinsLeft:true,family:"Punktfamilie",note:"Ein Punkt unter der Grundform." },
   { id:"ta",letter:"ت",name:"Tā’",sound:"t",forms:["ت","ـت","ـتـ","تـ"],joinsLeft:true,family:"Punktfamilie",note:"Zwei Punkte über der gleichen Grundform." },
   { id:"tha",letter:"ث",name:"Thā’",sound:"th wie engl. think",forms:["ث","ـث","ـثـ","ثـ"],joinsLeft:true,family:"Punktfamilie",note:"Drei Punkte über der gleichen Grundform." },
   { id:"jim",letter:"ج",name:"Jīm",sound:"dsch",forms:["ج","ـج","ـجـ","جـ"],joinsLeft:true,family:"Schalenform",note:"Ein Punkt in der Schale." },
   { id:"ha",letter:"ح",name:"Ḥā’",sound:"tiefes, gehauchtes ḥ",forms:["ح","ـح","ـحـ","حـ"],joinsLeft:true,family:"Schalenform",note:"Ohne Punkt. Ein tiefer Hauchlaut aus dem Rachen." },
   { id:"kha",letter:"خ",name:"Khā’",sound:"ch wie in Bach",forms:["خ","ـخ","ـخـ","خـ"],joinsLeft:true,family:"Schalenform",note:"Ein Punkt über der Schalenform." },
-  { id:"dal",letter:"د",name:"Dāl",sound:"d",forms:["د","ـد","—","—"],joinsLeft:false,family:"Bogenform",note:"Verbindet sich nicht mit dem folgenden Buchstaben links." },
+  { id:"dal",letter:"د",name:"Dāl",sound:"d",forms:["د","ـد","—","—"],joinsLeft:false,family:"Bogenform",note:"Nach Dāl beginnt der nächste Buchstabe getrennt." },
   { id:"dhal",letter:"ذ",name:"Dhāl",sound:"th wie engl. this",forms:["ذ","ـذ","—","—"],joinsLeft:false,family:"Bogenform",note:"Dāl mit einem Punkt darüber." },
-  { id:"ra",letter:"ر",name:"Rā’",sound:"gerolltes r",forms:["ر","ـر","—","—"],joinsLeft:false,family:"Bogenform",note:"Verbindet sich nicht mit dem folgenden Buchstaben links." },
+  { id:"ra",letter:"ر",name:"Rā’",sound:"gerolltes r",forms:["ر","ـر","—","—"],joinsLeft:false,family:"Bogenform",note:"Nach Rā’ beginnt der nächste Buchstabe getrennt." },
   { id:"zay",letter:"ز",name:"Zāy",sound:"stimmhaftes s",forms:["ز","ـز","—","—"],joinsLeft:false,family:"Bogenform",note:"Rā’ mit einem Punkt darüber." },
   { id:"sin",letter:"س",name:"Sīn",sound:"s",forms:["س","ـس","ـسـ","سـ"],joinsLeft:true,family:"Zahnform",note:"Drei kleine Zähne ohne Punkt." },
   { id:"shin",letter:"ش",name:"Shīn",sound:"sch",forms:["ش","ـش","ـشـ","شـ"],joinsLeft:true,family:"Zahnform",note:"Sīn mit drei Punkten darüber." },
@@ -68,7 +68,7 @@ const COURSE_MODULES = [
 const LESSONS = {
   "rtl-alif": {title:"Leserichtung & Alif",eyebrow:"Lektion 1 · Schriftbasis",letters:["alif"],slides:[
     {type:"direction",title:"Arabisch liest du von rechts nach links",body:"Du beginnst am rechten Rand und bewegst deinen Blick nach links. Die Buchstaben eines Wortes folgen ebenfalls dieser Richtung."},
-    {type:"letters",title:"Dein erster Buchstabe",body:"Alif verbindet sich nicht mit dem folgenden Buchstaben links. Nach einem Buchstaben mit Fatḥa trägt es ein langes ā; außerdem kann es als Träger für Hamza dienen."},
+    {type:"letters",title:"Dein erster Buchstabe",body:"Das ist Alif: ا. Allein siehst du ا, am Ende einer Verbindung ـا. Weitere Buchstaben, Laute und Verbindungsregeln lernst du erst in den nächsten Lektionen."},
     {type:"writing",title:"Schreibe Alif",body:"Ziehe mit Apple Pencil oder Finger einen ruhigen, geraden Strich von oben nach unten."}]},
   "dots": {title:"Bā’, Tā’ und Thā’",eyebrow:"Lektion 2 · Schriftbasis",letters:["ba","ta","tha"],slides:[
     {type:"letters",title:"Eine Form, drei Buchstaben",body:"Bā’, Tā’ und Thā’ haben dieselbe Grundform. Anzahl und Position der Punkte bestimmen den Buchstaben."},
